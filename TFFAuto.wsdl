@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="TFFAuto"
+             targetNamespace="https://tffauto.no/xml/TFFAuto/2017-03-01/TFFAuto.wsdl"
+             xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:tns="https://tffauto.no/xml/TFFAuto/2017-03-01/TFFAuto.wsdl"
+             xmlns:tffa="https://tffauto.no/xml/TFFAuto/2017-03-01/TFFAuto.xsd"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+
+  <documentation>
+    Tjenestespesifikasjon for TFFAuto.
+
+    © 2017 Trafikkforsikringsforeningen
+    Forfatter: Dag Lem &lt;dag@nimrod.no&gt;
+  </documentation>
+
+  <types>
+    <schema xmlns="http://www.w3.org/2001/XMLSchema">
+      <import
+        namespace="https://tffauto.no/xml/TFFAuto/2017-03-01/TFFAuto.xsd"
+        schemaLocation="https://tffauto.no/xml/TFFAuto/2017-03-01/TFFAuto.xsd"/>
+    </schema>
+  </types>
+
+  <message name="spoerring">
+    <part name="Autentisering" element="tffa:Autentisering"/>
+  </message>
+
+  <message name="feil">
+    <part name="feil" element="tffa:Feil"/>
+  </message>
+
+  <message name="hentKjoeretoeylisteRequest">
+    <part name="hentKjoeretoeyliste" element="tffa:hentKjoeretoeyliste"/>
+  </message>
+  <message name="hentKjoeretoeylisteResponse">
+    <part name="Kjoeretoeyliste" element="tffa:Kjoeretoeyliste"/>
+  </message>
+  <message name="hentKjoeretoeydataRequest">
+    <part name="hentKjoeretoeydata" element="tffa:hentKjoeretoeydata"/>
+  </message>
+  <message name="hentKjoeretoeydataResponse">
+    <part name="Kjoeretoeydata" element="tffa:Kjoeretoeydata"/>
+  </message>
+  <message name="stillGarantiRequest">
+    <part name="stillGaranti" element="tffa:stillGaranti"/>
+  </message>
+  <message name="stillGarantiResponse">
+    <part name="Garanti" element="tffa:Garanti"/>
+  </message>
+  <message name="oppdaterGarantiRequest">
+    <part name="oppdaterGaranti" element="tffa:oppdaterGaranti"/>
+  </message>
+  <message name="oppdaterGarantiResponse">
+    <part name="Garanti" element="tffa:Garanti"/>
+  </message>
+  <message name="trekkGarantiRequest">
+    <part name="trekkGaranti" element="tffa:trekkGaranti"/>
+  </message>
+  <message name="trekkGarantiResponse">
+    <part name="Garanti" element="tffa:Garanti"/>
+  </message>
+  <message name="hentGarantilisteRequest">
+    <part name="parameters" element="tffa:hentGarantiliste"/>
+  </message>
+  <message name="hentGarantilisteResponse">
+    <part name="hentGarantiliste" element="tffa:Garantiliste"/>
+  </message>
+  <message name="hentMeldingsloggRequest">
+    <part name="hentMeldingslogg" element="tffa:hentMeldingslogg"/>
+  </message>
+  <message name="hentMeldingsloggResponse">
+    <part name="Meldingslogg" element="tffa:Meldingslogg"/>
+  </message>
+  <message name="hentForsikretRequest">
+    <part name="hentForsikret" element="tffa:hentForsikret"/>
+  </message>
+  <message name="hentForsikretResponse">
+    <part name="Forsikret" element="tffa:Forsikret"/>
+  </message>
+  <message name="beregnAvgiftsgruppeRequest">
+    <part name="beregnAvgiftsgruppe" element="tffa:beregnAvgiftsgruppe"/>
+  </message>
+  <message name="beregnAvgiftsgruppeResponse">
+    <part name="Avgiftsgruppe" element="tffa:Avgiftsgruppe"/>
+  </message>
+  <message name="opprettBrukerRequest">
+    <part name="opprettBruker" element="tffa:opprettBruker"/>
+  </message>
+  <message name="opprettBrukerResponse">
+    <part name="Bruker" element="tffa:Bruker"/>
+  </message>
+  <message name="oppdaterBrukerRequest">
+    <part name="oppdaterBruker" element="tffa:oppdaterBruker"/>
+  </message>
+  <message name="oppdaterBrukerResponse">
+    <part name="Bruker" element="tffa:Bruker"/>
+  </message>
+  <message name="slettBrukerRequest">
+    <part name="slettBruker" element="tffa:slettBruker"/>
+  </message>
+  <message name="slettBrukerResponse">
+    <part name="Bruker" element="tffa:Bruker"/>
+  </message>
+
+  <portType name="TFFAutoPortType">
+    <operation name="hentKjoeretoeyliste">
+      <documentation>
+        Søk etter kjøretøy eid av person eller foretak.
+      </documentation>
+      <input message="tns:hentKjoeretoeylisteRequest"/>
+      <output message="tns:hentKjoeretoeylisteResponse"/>
+      <fault name="feil" message="tns:feil"/>
+    </operation>
+    <operation name="hentKjoeretoeydata">
+      <documentation>
+        Vis tekniske data, eier, og forsikringsdata for angitt kjøretøy.
+      </documentation>
+      <input message="tns:hentKjoeretoeydataRequest"/>
+      <output message="tns:hentKjoeretoeydataResponse"/>
+      <fault name="feil" message="tns:feil"/>
+    </operation>
+    <operation name="stillGaranti">
+      <documentation>
+        Still ny garanti.
+      </documentation>
+      <input message="tns:stillGarantiRequest"/>
+      <output message="tns:stillGarantiResponse"/>
+      <fault name="feil" message="tns:feil"/>
+    </operation>
+    <operation name="oppdaterGaranti">
+      <documentation>
+        Utfør endringer på eksisterende garanti.
+      </documentation>
+      <input message="tns:oppdaterGarantiRequest"/>
+      <output message="tns:oppdaterGarantiResponse"/>
+      <fault name="feil" message="tns:feil"/>
+    </operation>
+    <operation name="trekkGaranti">
+      <documentation>
+        Trekk eksisterende garanti.
+      </documentation>
+      <input message="tns:trekkGarantiRequest"/>
+      <output message="tns:trekkGarantiResponse"/>
+      <fault name="feil" message="tns:feil"/>
+    </operation>
+    <operation name="hentGarantiliste">
+      <documentation>
+        Vis garantier som svarer til angitte kriterier.
+      </documentation>
+      <input message="tns:hentGarantilisteRequest"/>
+      <output message="tns:hentGarantilisteResponse"/>
+      <fault name="feil" message="tns:feil"/>
+    </operation>
+    <operation name="hentMeldingslogg">
+      <documentation>
+        Vis meldinger i meldingsloggen.
+      </documentation>
+      <input message="tns:hentMeldingsloggRequest"/>
+      <output message="tns:hentMeldingsloggResponse"/>
+      <fault name="feil" message="tns:feil"/>
+    </operation>
+    <operation name="hentForsikret">
+      <documentation>
+        Vis ansvarlig selskap / forsikringsstatus for et kjøretøy på et gitt tidspunkt.
+      </documentation>
+      <input message="tns:hentForsikretRequest"/>
+      <output message="tns:hentForsikretResponse"/>
+      <fault name="feil" message="tns:feil"/>
+    </operation>
+    <operation name="beregnAvgiftsgruppe">
+      <documentation>
+        Beregn avgiftsgruppe basert på overordnet informasjon om kjøretøy.
+      </documentation>
+      <input message="tns:beregnAvgiftsgruppeRequest"/>
+      <output message="tns:beregnAvgiftsgruppeResponse"/>
+      <fault name="feil" message="tns:feil"/>
+    </operation>
+    <operation name="opprettBruker">
+      <documentation>
+        Opprett ny bruker.
+      </documentation>
+      <input message="tns:opprettBrukerRequest"/>
+      <output message="tns:opprettBrukerResponse"/>
+      <fault name="feil" message="tns:feil"/>
+    </operation>
+    <operation name="oppdaterBruker">
+      <documentation>
+        Endre eksisterende bruker.
+      </documentation>
+      <input message="tns:oppdaterBrukerRequest"/>
+      <output message="tns:oppdaterBrukerResponse"/>
+      <fault name="feil" message="tns:feil"/>
+    </operation>
+    <operation name="slettBruker">
+      <documentation>
+        Slett eksisterende bruker.
+      </documentation>
+      <input message="tns:slettBrukerRequest"/>
+      <output message="tns:slettBrukerResponse"/>
+      <fault name="feil" message="tns:feil"/>
+    </operation>
+  </portType>
+
+  <binding name="TFFAutoBinding" type="tns:TFFAutoPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="hentKjoeretoeyliste">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:header message="tns:spoerring" part="Autentisering" use="literal"/>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="feil">
+        <soap:fault name="feil" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="hentKjoeretoeydata">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:header message="tns:spoerring" part="Autentisering" use="literal"/>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="feil">
+        <soap:fault name="feil" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="stillGaranti">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:header message="tns:spoerring" part="Autentisering" use="literal"/>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="feil">
+        <soap:fault name="feil" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="oppdaterGaranti">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:header message="tns:spoerring" part="Autentisering" use="literal"/>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="feil">
+        <soap:fault name="feil" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="trekkGaranti">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:header message="tns:spoerring" part="Autentisering" use="literal"/>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="feil">
+        <soap:fault name="feil" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="hentGarantiliste">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:header message="tns:spoerring" part="Autentisering" use="literal"/>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="feil">
+        <soap:fault name="feil" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="hentMeldingslogg">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:header message="tns:spoerring" part="Autentisering" use="literal"/>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="feil">
+        <soap:fault name="feil" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="hentForsikret">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:header message="tns:spoerring" part="Autentisering" use="literal"/>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="feil">
+        <soap:fault name="feil" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="beregnAvgiftsgruppe">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:header message="tns:spoerring" part="Autentisering" use="literal"/>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="feil">
+        <soap:fault name="feil" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="opprettBruker">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:header message="tns:spoerring" part="Autentisering" use="literal"/>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="feil">
+        <soap:fault name="feil" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="oppdaterBruker">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:header message="tns:spoerring" part="Autentisering" use="literal"/>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="feil">
+        <soap:fault name="feil" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="slettBruker">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:header message="tns:spoerring" part="Autentisering" use="literal"/>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="feil">
+        <soap:fault name="feil" use="literal"/>
+      </fault>
+    </operation>
+  </binding>
+
+  <service name="TFFAutoService">
+    <port name="TFFAutoPort" binding="tns:TFFAutoBinding">
+      <soap:address location="https://tffauto.no/soap/TFFAuto"/>
+    </port>
+  </service>
+</definitions>

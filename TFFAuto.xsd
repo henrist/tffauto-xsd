@@ -1,0 +1,1994 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<schema targetNamespace="https://tffauto.no/xml/TFFAuto/2017-03-01/TFFAuto.xsd"
+        xmlns:tns="https://tffauto.no/xml/TFFAuto/2017-03-01/TFFAuto.xsd"
+        xmlns="http://www.w3.org/2001/XMLSchema"
+        elementFormDefault="unqualified">
+  <annotation>
+    <documentation xml:lang="no">
+      XML Schema for TFFAuto.
+
+      © 2017 Trafikkforsikringsforeningen
+      Forfatter: Dag Lem &lt;dag@nimrod.no&gt;
+    </documentation>
+    <documentation xml:lang="en">
+      XML Schema for TFFAuto.
+
+      © 2017 Trafikkforsikringsforeningen
+      Author: Dag Lem &lt;dag@nimrod.no&gt;
+    </documentation>
+  </annotation>
+
+  <simpleType name="decimal5_4">
+    <restriction base="decimal">
+      <totalDigits value="5"/>
+      <fractionDigits value="4"/>
+    </restriction>
+  </simpleType>
+
+  <simpleType name="decimal6_2">
+    <restriction base="decimal">
+      <totalDigits value="6"/>
+      <fractionDigits value="2"/>
+    </restriction>
+  </simpleType>
+
+  <simpleType name="int1">
+    <restriction base="int">
+      <totalDigits value="1"/>
+    </restriction>
+  </simpleType>
+
+  <simpleType name="int2">
+    <restriction base="int">
+      <totalDigits value="2"/>
+    </restriction>
+  </simpleType>
+
+  <simpleType name="int3">
+    <restriction base="int">
+      <totalDigits value="3"/>
+    </restriction>
+  </simpleType>
+
+  <simpleType name="int4">
+    <restriction base="int">
+      <totalDigits value="4"/>
+    </restriction>
+  </simpleType>
+
+  <simpleType name="int5">
+    <restriction base="int">
+      <totalDigits value="5"/>
+    </restriction>
+  </simpleType>
+
+  <simpleType name="int6">
+    <restriction base="int">
+      <totalDigits value="6"/>
+    </restriction>
+  </simpleType>
+
+  <simpleType name="int7">
+    <restriction base="int">
+      <totalDigits value="7"/>
+    </restriction>
+  </simpleType>
+
+  <simpleType name="kode1">
+    <restriction base="string">
+      <length value="1"/>
+    </restriction>
+  </simpleType>
+
+  <simpleType name="kode2">
+    <restriction base="string">
+      <length value="2"/>
+    </restriction>
+  </simpleType>
+
+  <simpleType name="kode3">
+    <restriction base="string">
+      <length value="3"/>
+    </restriction>
+  </simpleType>
+
+  <simpleType name="kode4">
+    <restriction base="string">
+      <length value="4"/>
+    </restriction>
+  </simpleType>
+
+  <simpleType name="kode5">
+    <restriction base="string">
+      <length value="5"/>
+    </restriction>
+  </simpleType>
+
+  <simpleType name="string2">
+    <restriction base="string">
+      <length value="2"/>
+    </restriction>
+  </simpleType>
+
+  <simpleType name="string4">
+    <restriction base="string">
+      <maxLength value="4"/>
+    </restriction>
+  </simpleType>
+
+  <simpleType name="string9">
+    <restriction base="string">
+      <maxLength value="9"/>
+    </restriction>
+  </simpleType>
+
+  <simpleType name="string11">
+    <restriction base="string">
+      <maxLength value="11"/>
+    </restriction>
+  </simpleType>
+
+  <simpleType name="string15">
+    <restriction base="string">
+      <maxLength value="15"/>
+    </restriction>
+  </simpleType>
+
+  <simpleType name="string19">
+    <restriction base="string">
+      <maxLength value="19"/>
+    </restriction>
+  </simpleType>
+
+  <simpleType name="string25">
+    <restriction base="string">
+      <maxLength value="25"/>
+    </restriction>
+  </simpleType>
+
+  <simpleType name="string20">
+    <restriction base="string">
+      <maxLength value="20"/>
+    </restriction>
+  </simpleType>
+
+  <simpleType name="string30">
+    <restriction base="string">
+      <maxLength value="30"/>
+    </restriction>
+  </simpleType>
+
+  <simpleType name="string36">
+    <restriction base="string">
+      <maxLength value="36"/>
+    </restriction>
+  </simpleType>
+
+  <simpleType name="string40">
+    <restriction base="string">
+      <maxLength value="40"/>
+    </restriction>
+  </simpleType>
+
+  <simpleType name="string80">
+    <restriction base="string">
+      <maxLength value="80"/>
+    </restriction>
+  </simpleType>
+
+  <simpleType name="string100">
+    <restriction base="string">
+      <maxLength value="100"/>
+    </restriction>
+  </simpleType>
+
+  <simpleType name="string254">
+    <restriction base="string">
+      <maxLength value="254"/>
+    </restriction>
+  </simpleType>
+
+  <group name="KjennemerkeGroup">
+    <sequence>
+      <element name="kjennemerke" type="tns:string15">
+        <annotation>
+          <documentation xml:lang="no">TAD#3, VFTEK#5: Kjennemerke</documentation>
+        </annotation>
+      </element>
+      <element name="kjennemerkelandkode" type="tns:kode3" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Landkode ihht. ISO-3166-1 alpha-3</documentation>
+        </annotation>
+      </element>
+    </sequence>
+  </group>
+
+  <complexType name="KjennemerkeType">
+    <sequence>
+      <group ref="tns:KjennemerkeGroup"/>
+      <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="SelskapType">
+    <sequence>
+      <element name="selskapskode" type="tns:kode4">
+        <annotation>
+          <documentation xml:lang="no">Kode for forsikringsselskap</documentation>
+        </annotation>
+      </element>
+      <element name="selskapsnavn" type="tns:string30">
+        <annotation>
+          <documentation xml:lang="no">F.eks. IF</documentation>
+        </annotation>
+      </element>
+      <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="HentKjoeretoeylisteType">
+    <sequence>
+      <element name="eierEllerForsikringstaker" type="tns:FnrOrgnrNavnNillableType">
+        <annotation>
+          <documentation xml:lang="no">Eier eller forsikringstaker</documentation>
+        </annotation>
+      </element>
+      <element name="sidenummer" type="int" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Sidenummer, nummerert fra 1</documentation>
+        </annotation>
+      </element>
+      <element name="antallPerSide" type="int" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Maksimalt antall treff per side</documentation>
+        </annotation>
+      </element>
+      <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="KjoeretoeylisteType">
+    <sequence>
+      <element name="statuskode" type="tns:int4">
+        <annotation>
+          <documentation xml:lang="no">Statuskode</documentation>
+        </annotation>
+      </element>
+      <element name="statustekst" type="tns:string100" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Statustekst</documentation>
+        </annotation>
+      </element>
+      <element name="data" type="tns:KjoeretoeylisteDataType" nillable="true"/>
+      <any maxOccurs="unbounded" minOccurs="0" processContents="lax"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="KjoeretoeylisteDataType">
+    <sequence>
+      <element name="kjoeretoey" type="tns:KjoeretoeylisteKjoeretoeyType" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="KjoeretoeylisteKjoeretoeyType">
+    <sequence>
+      <group ref="tns:KjennemerkeGroup"/>
+      <element name="personligKjennemerke" type="tns:string15" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Personlig kjennemerke</documentation>
+        </annotation>
+      </element>
+      <element name="regAar" type="gYear" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">TAD#7, VFTEK#18: År for første gangs registrering (Norge / utland)</documentation>
+        </annotation>
+      </element>
+      <element name="teknisk" type="tns:KjoeretoeylisteTekniskType">
+        <annotation>
+          <documentation xml:lang="no">Tekniske data</documentation>
+        </annotation>
+      </element>
+      <element name="eier" type="tns:FnrOrgnrNavnType">
+        <annotation>
+          <documentation xml:lang="no">Eier ihht. siste om- eller påregistrering eller salgsmelding</documentation>
+        </annotation>
+      </element>
+      <element name="garantier" type="tns:KjoeretoeylisteGarantierType"/>
+      <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="KjoeretoeylisteTekniskType">
+    <sequence>
+      <element name="merkekode" type="tns:kode4" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">TAD#8, VFTEK#11: Fabrikat, f.eks. 1230 for Audi - jfr. Kodehefte Autosys</documentation>
+        </annotation>
+      </element>
+      <element name="merkenavn" type="tns:string30" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">TAD fabrikatrecord#5: F.eks. Audi eller Mercedes</documentation>
+        </annotation>
+      </element>
+      <element name="modellbetegnelse" type="tns:string25" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">VFTEK#14: Modell, f.eks. A6 ALLROAD QUATTRO</documentation>
+        </annotation>
+      </element>
+      <element name="typebetegnelse" type="tns:string25" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">VFTEK#16: Type / facelift, f.eks. 4G</documentation>
+        </annotation>
+      </element>
+      <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="KjoeretoeylisteGarantierType">
+    <sequence>
+      <element name="garanti" type="tns:KjoeretoeylisteGarantiType" minOccurs="1" maxOccurs="unbounded">
+        <annotation>
+          <documentation xml:lang="no">Garantidata</documentation>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+
+  <complexType name="KjoeretoeylisteGarantiType">
+    <sequence>
+      <element name="garantistatus" type="tns:kode1">
+        <annotation>
+          <documentation xml:lang="no">U = Uforsikret, I = Ikke forsikringsplikt, S = Selvassuranse, V = Garanti på vent, A = Aktiv garanti</documentation>
+        </annotation>
+      </element>
+      <element name="eier" type="tns:FnrOrgnrNavnType">
+        <annotation>
+          <documentation xml:lang="no">Eiers fødselsnr / orgnr og navn</documentation>
+        </annotation>
+      </element>
+      <element name="forsikringstaker" type="tns:FnrOrgnrNavnType" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Forsikringstakers fødselsnr / orgnr og navn</documentation>
+        </annotation>
+      </element>
+      <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="KjoeretoeydataType">
+    <sequence>
+      <element name="statuskode" type="tns:int4">
+        <annotation>
+          <documentation xml:lang="no">Statuskode</documentation>
+        </annotation>
+      </element>
+      <element name="statustekst" type="tns:string100" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Statustekst</documentation>
+        </annotation>
+      </element>
+      <element name="data" type="tns:KjoeretoeydataDataType" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Kjøretøydata</documentation>
+        </annotation>
+      </element>
+      <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="KjoeretoeydataDataType">
+    <sequence>
+      <group ref="tns:KjennemerkeGroup"/>
+      <element name="kjennemerkefarge" type="tns:int1" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">TAD#32, VFTEK#6: 0 = Hvit, 1 = Svart, 2 = Rød, 3 = Blå, 4 = Grønn, 5 = Rally</documentation>
+        </annotation>
+      </element>
+      <element name="personligKjennemerke" type="tns:string15" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Personlig kjennemerke</documentation>
+        </annotation>
+      </element>
+      <element name="forrigeKjennemerke" type="tns:string15" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Forrige kjennemerke</documentation>
+        </annotation>
+      </element>
+      <element name="regAar" type="gYear" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">TAD#7, VFTEK#18: År for første gangs registrering (Norge / utland)</documentation>
+        </annotation>
+      </element>
+      <element name="regDatoNorge" type="date" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">TAD#16 (recordtype 50): Dato for første gangs registrering i Norge</documentation>
+        </annotation>
+      </element>
+      <element name="regDatoUtland" type="date" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">TAD#45: Dato for første gangs registrering i utland</documentation>
+        </annotation>
+      </element>
+      <element name="avregDato" type="date" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">TAD#31: Avregistrert dato</documentation>
+        </annotation>
+      </element>
+      <element name="vraketDato" type="date" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">TAD#64 (recordtype 56): Vraket dato</documentation>
+        </annotation>
+      </element>
+      <element name="stjaaletDato" type="date" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">TAD#52, TAD#16 (recordtype 64, 54): Stjålet dato</documentation>
+        </annotation>
+      </element>
+      <element name="utfoertDato" type="date" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">TAD#53: Utført dato</documentation>
+        </annotation>
+      </element>
+      <element name="pkkGodkjentDato" type="date" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">VFLOK (VF100): Dato for siste EU-godkjenning</documentation>
+        </annotation>
+      </element>
+      <element name="skadestatus" type="tns:kode2" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Kode for informasjon om f.eks. antall skader på kjøretøy</documentation>
+        </annotation>
+      </element>
+      <element name="kondemneringskode" type="tns:int1" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">0 = Ikke kondemnert, 1 = Kondemnert for oppbygging, 2 = Kondemnert for vraking</documentation>
+        </annotation>
+      </element>
+      <element name="understellsnr" type="tns:string19" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">TAD#4, VFTEK#10: Understellsnummer</documentation>
+        </annotation>
+      </element>
+      <element name="fargekode" type="tns:int2" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Fargekode</documentation>
+        </annotation>
+      </element>
+      <element name="fargenavn" type="tns:string20" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">F.eks. Rød eller Blå-F (flerfarget)</documentation>
+        </annotation>
+      </element>
+      <element name="brukskode" type="tns:int2" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">TAD#15: Kode for kjøringens art, jfr. Kodehefte Autosys</documentation>
+        </annotation>
+      </element>
+      <element name="bruksnavn" type="tns:string80" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">TAD#15: Kjøringens art, jfr. Kodehefte Autosys</documentation>
+        </annotation>
+      </element>
+      <element name="avgiftsgruppe" type="tns:kode2" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Kode for avgiftsgruppe</documentation>
+        </annotation>
+      </element>
+      <element name="dagsats" type="tns:decimal6_2" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Dagsats for TA, i norske kroner</documentation>
+        </annotation>
+      </element>
+      <element name="kmstandBruktimportert" type="tns:int7" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">TAD#48: Kilometerstand for bruktimporterte kjøretøy</documentation>
+        </annotation>
+      </element>
+      <element name="registrertEier" type="tns:RollehaverType" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Eier ihht. siste om- eller påregistrering (eier i vognkort). TAD#16 (recordtype 52): Dato for om- eller påregistrering ny eier</documentation>
+        </annotation>
+      </element>
+      <element name="eier" type="tns:RollehaverType">
+        <annotation>
+          <documentation xml:lang="no">Eier ihht. siste om- eller påregistrering eller salgsmelding</documentation>
+        </annotation>
+      </element>
+      <element name="medeiere" nillable="true">
+        <complexType>
+          <sequence>
+            <element name="medeier" type="tns:FnrOrgnrType" minOccurs="0" maxOccurs="unbounded">
+              <annotation>
+                <documentation xml:lang="no">Medeiers fødselsnr / orgnr</documentation>
+              </annotation>
+            </element>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="leietaker" type="tns:FnrOrgnrType" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Leietakers fødselsnr / orgnr</documentation>
+        </annotation>
+      </element>
+      <element name="teknisk" type="tns:TekniskType">
+        <annotation>
+          <documentation xml:lang="no">Tekniske data</documentation>
+        </annotation>
+      </element>
+      <element name="garantier" type="tns:GarantierType">
+        <annotation>
+          <documentation xml:lang="no">Garantier</documentation>
+        </annotation>
+      </element>
+      <element name="beregnetStartdato" type="date" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Beregnet startdato for garanti ved selskapsbytte</documentation>
+        </annotation>
+      </element>
+      <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="TekniskType">
+    <sequence>
+      <element name="typegodkjenningsnr" type="tns:string11" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">VFTEK#7: Typegodkjenningsnummer</documentation>
+        </annotation>
+      </element>
+      <element name="enkeltgodkjent" type="boolean" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Angir om kjøretøyet er enkeltgodkjent</documentation>
+        </annotation>
+      </element>
+      <element name="merkekode" type="tns:kode4" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">TAD#8, VFTEK#11: Fabrikat, f.eks. 1230 for Audi - jfr. Kodehefte Autosys</documentation>
+        </annotation>
+      </element>
+      <element name="merkenavn" type="tns:string30" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">TAD fabrikatrecord#5: F.eks. Audi eller Mercedes</documentation>
+        </annotation>
+      </element>
+      <element name="modellbetegnelse" type="tns:string25" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">VFTEK#14: Modell, f.eks. A6 ALLROAD QUATTRO</documentation>
+        </annotation>
+      </element>
+      <element name="typebetegnelse" type="tns:string25" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">VFTEK#16: Type / facelift, f.eks. 4G</documentation>
+        </annotation>
+      </element>
+      <element name="kjoeretoeygruppe" type="tns:int3" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">TAD#14, VFTEK#20: Kjøretøygruppe, avgift</documentation>
+        </annotation>
+      </element>
+      <element name="kjoeretoeygruppenavn" type="tns:string100" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">F.eks. Personbil, unntatt ambulanse</documentation>
+        </annotation>
+      </element>
+      <element name="karosseritype" type="tns:int2" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">TAD#69: Kode for karosseritype</documentation>
+        </annotation>
+      </element>
+      <element name="paabyggkode" type="tns:int2" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">TAD#72: Kode for påbygg, jfr. Kodehefte Autosys</documentation>
+        </annotation>
+      </element>
+      <element name="tillattTotalvekt" type="tns:int6" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">TAD#56, VFTEK#15: Tillatt totalvekt</documentation>
+        </annotation>
+      </element>
+      <element name="maksLastForaksel" type="tns:int5" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">VFTEK#22: Største tillatte last foraksel</documentation>
+        </annotation>
+      </element>
+      <element name="maksLastBakaksel" type="tns:int6" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">VFTEK#26: Største tillatte last bakaksel</documentation>
+        </annotation>
+      </element>
+      <element name="egenvekt" type="tns:int5" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">TAD#21, VFTEK#17: Egenvekt</documentation>
+        </annotation>
+      </element>
+      <element name="egenvektForaksel" type="tns:int5" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">VFTEK#30: Egenvekt foraksel</documentation>
+        </annotation>
+      </element>
+      <element name="egenvektBakaksel" type="tns:int5" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">VFTEK#33: Egenvekt bakaksel</documentation>
+        </annotation>
+      </element>
+      <element name="maksNyttelast" type="tns:int6" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">VFTEK#19: Største tillatte nyttelast</documentation>
+        </annotation>
+      </element>
+      <element name="maksVogntogvekt" type="tns:int6" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">VFTEK#45: Største tillatte vogntogvekt</documentation>
+        </annotation>
+      </element>
+      <element name="maksTilhengervektMedBrems" type="tns:int5" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">VFTEK#47: Største tillatte vekt for tilhenger m/ brems</documentation>
+        </annotation>
+      </element>
+      <element name="maksTilhengervektUtenBrems" type="tns:int5" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">VFTEK#49: Største tillatte vekt for tilhenger u/ brems</documentation>
+        </annotation>
+      </element>
+      <element name="maksKoplingslast" type="tns:int5" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">VFTEK#36: Største tillatte koplingtrykk for tilhengerfeste</documentation>
+        </annotation>
+      </element>
+      <element name="maksTaklast" type="tns:int4" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">VFTEK#40: Største tillatte taklast</documentation>
+        </annotation>
+      </element>
+      <element name="bredde" type="tns:int3" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">VFTEK#35: Kjøretøyets bredde i cm</documentation>
+        </annotation>
+      </element>
+      <element name="lengde" type="tns:int4" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">TAD#27, VFTEK#34: Kjøretøyets lengde i cm</documentation>
+        </annotation>
+      </element>
+      <element name="hoeyde" type="tns:int3" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">TAD#68: Kjøretøyets høyde i cm</documentation>
+        </annotation>
+      </element>
+      <element name="akselavstand1" type="tns:int4" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">VFTEK#41: Akselavstand</documentation>
+        </annotation>
+      </element>
+      <element name="akselavstand2" type="tns:int4" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">VFTEK#42: Akselavstand</documentation>
+        </annotation>
+      </element>
+      <element name="akselavstand3" type="tns:int4" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">VFTEK#43: Akselavstand</documentation>
+        </annotation>
+      </element>
+      <element name="akselavstand4" type="tns:int4" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">VFTEK#44: Akselavstand</documentation>
+        </annotation>
+      </element>
+      <element name="lengdeTilTilhengerfeste" type="tns:int4" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">VFTEK#67: Lengde til tilhengerfeste</documentation>
+        </annotation>
+      </element>
+      <element name="girkasse" type="tns:kode2" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">TAD#70: Girkasse</documentation>
+        </annotation>
+      </element>
+      <element name="motorytelse" type="tns:decimal6_2" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">TAD#23, VFTEK#27: Motorytelse</documentation>
+        </annotation>
+      </element>
+      <element name="ytelsesmaal" type="tns:string2" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">TAD#24, VFTEK#28: kW / hk</documentation>
+        </annotation>
+      </element>
+      <element name="motorytelseKW" type="tns:decimal6_2" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">TAD#23, VFTEK#27: Motorytelse i kW</documentation>
+        </annotation>
+      </element>
+      <element name="motorytelseHk" type="tns:decimal6_2" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">TAD#23, VFTEK#27: Motorytelse i HK</documentation>
+        </annotation>
+      </element>
+      <element name="slagvolum" type="tns:int6" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">TAD#22, VFTEK#29: Slagvolum i kubikkcentimeter (milliliter)</documentation>
+        </annotation>
+      </element>
+      <element name="drivstoffkode" type="tns:int2" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">TAD#18, VFTEK#31: Kode for drivstoff, jfr. Kodehefte Autosys</documentation>
+        </annotation>
+      </element>
+      <element name="drivstoffnavn" type="tns:string15" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">F.eks. Diesel</documentation>
+        </annotation>
+      </element>
+      <element name="sitteplasserTotalt" type="tns:int2" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">VFTEK#57: Sitteplasser totalt</documentation>
+        </annotation>
+      </element>
+      <element name="sitteplasserForan" type="tns:int1" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">VFTEK#58: Sitteplasser foran</documentation>
+        </annotation>
+      </element>
+      <element name="staaplasser" type="tns:int3" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">VFTEK#61: Ståplasser</documentation>
+        </annotation>
+      </element>
+      <element name="antallAksler" type="tns:int2" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">TAD#37, VFTEK#37: Antall aksler</documentation>
+        </annotation>
+      </element>
+      <element name="antallAkslerDrift" type="tns:int1" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">VFTEK#38: Antall aksler m/ drift</documentation>
+        </annotation>
+      </element>
+      <element name="stdDekkdimForan" type="tns:string25" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">VFTEK#46: Standard dekkdimensjon foran</documentation>
+        </annotation>
+      </element>
+      <element name="stdDekkdimBak" type="tns:string25" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">VFTEK#48: Standard dekkdimensjon bak</documentation>
+        </annotation>
+      </element>
+      <element name="minLastindeksForan" type="tns:string9" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">VFTEK#50: Minste tillatte lastindeks foran</documentation>
+        </annotation>
+      </element>
+      <element name="minLastindeksBak" type="tns:string9" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">VFTEK#51: Minste tillatte lastindeks bak</documentation>
+        </annotation>
+      </element>
+      <element name="minHastighetsindeksForan" type="tns:string4" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">VFTEK#55: Minste tillatte hastighetsindeks foran</documentation>
+        </annotation>
+      </element>
+      <element name="minHastighetsindeksBak" type="tns:string4" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">VFTEK#56: Minste tillatte hastighetsindeks bak</documentation>
+        </annotation>
+      </element>
+      <element name="stdFelgdimForan" type="tns:string15" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">VFTEK#59: Standard felgdimensjon foran</documentation>
+        </annotation>
+      </element>
+      <element name="stdFelgdimBak" type="tns:string15" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">VFTEK#60: Standard felgdimensjon foran</documentation>
+        </annotation>
+      </element>
+      <element name="minInnpressForan" type="tns:int5" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">VFTEK#62: Minste tillatte innpress foran</documentation>
+        </annotation>
+      </element>
+      <element name="minInnpressBak" type="tns:int5" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">VFTEK#63: Minste tillatte innpress bak</documentation>
+        </annotation>
+      </element>
+      <element name="maksSporviddeForan" type="tns:int4" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">VFTEK#65: Største tillatte sporvidde foran</documentation>
+        </annotation>
+      </element>
+      <element name="maksSporviddeBak" type="tns:int4" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">VFTEK#66: Største tillatte sporvidde bak</documentation>
+        </annotation>
+      </element>
+      <element name="standstoey" type="tns:int3" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">VFTEK#52: Standstøy i dB</documentation>
+        </annotation>
+      </element>
+      <element name="omdreininger" type="tns:int4" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">VFTEK#53: Støymåling utført ved antall omdreininger/minutt</documentation>
+        </annotation>
+      </element>
+      <element name="stoeykilde" type="tns:kode1" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">VFTEK#54: Støykilde</documentation>
+        </annotation>
+      </element>
+      <element name="partikkelfilter" type="tns:int1" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">TAD#57: Fab.mont. partikkelfilter. 0 = Uoppgitt, 1 = Nei, 2 = Ja</documentation>
+        </annotation>
+      </element>
+      <element name="eurokode" type="tns:string2" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">TAD#58: Kode for euroklassifisering og tyngde, jfr. Kodehefte Autosys</documentation>
+        </annotation>
+      </element>
+      <element name="co2Utslipp" type="tns:int4" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">TAD#47: CO₂-utslipp</documentation>
+        </annotation>
+      </element>
+      <element name="noxUtslipp" type="tns:decimal5_4" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">TAD#59: NOₓ-utslipp i g/km eller g/kWh</documentation>
+        </annotation>
+      </element>
+      <element name="hybrid" type="tns:kode1" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">TAD#60: 0 = Ikke hybrid, 1 = Hybrid, 9 = Ikke kjent</documentation>
+        </annotation>
+      </element>
+      <element name="hybridkategori" type="tns:kode1" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">TAD#61: 1 = Ladbar fra strømnettet, 2 = Ikke ladbar fra strømnettet, X = Ingen, Z = Annet</documentation>
+        </annotation>
+      </element>
+      <element name="tipp" type="boolean" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">VFTEK#23: Tipp</documentation>
+        </annotation>
+      </element>
+      <element name="kran" type="boolean" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">VFTEK#24: Kran</documentation>
+        </annotation>
+      </element>
+      <element name="lasteplanlengde" type="tns:int4" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">VFTEK#64: Lengde på lasteplan</documentation>
+        </annotation>
+      </element>
+      <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="GarantierType">
+    <sequence>
+      <element name="garanti" type="tns:GarantiType" minOccurs="1" maxOccurs="unbounded">
+        <annotation>
+          <documentation xml:lang="no">Garantidata</documentation>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+
+  <complexType name="GarantiType">
+    <sequence>
+      <element name="egenId" type="tns:string36" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Selskapets egen unike ID for garantien. Inntil 36 tegn mhp. evt. UUID</documentation>
+        </annotation>
+      </element>
+      <element name="kjoeretoey" type="tns:KjennemerkeType"/>
+      <element name="eier" type="tns:FnrOrgnrNavnType">
+        <annotation>
+          <documentation xml:lang="no">Eier</documentation>
+        </annotation>
+      </element>
+      <element name="forsikringstaker" type="tns:FnrOrgnrNavnEpostTlfNillableType" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Forsikringstaker</documentation>
+        </annotation>
+      </element>
+      <element name="selskap" type="tns:SelskapType">
+        <annotation>
+          <documentation xml:lang="no">Forsikringsselskap</documentation>
+        </annotation>
+      </element>
+      <element name="garantistatus" type="tns:kode1">
+        <annotation>
+          <documentation xml:lang="no">U = Uforsikret, I = Ikke forsikringsplikt, S = Selvassuranse, V = Garanti på vent, A = Aktiv garanti</documentation>
+        </annotation>
+      </element>
+      <element name="forsikringsbehovskode" type="tns:kode1">
+        <annotation>
+          <documentation xml:lang="no">M = Prøvekjennemerke, N = Nyregistrering, E = Eierskifte, P = Påregistrering, S = Selskapsbytte, U = Forsikring av uforsikret kjøretøy, T = Tilbakedatert selskapsbytte</documentation>
+        </annotation>
+      </element>
+      <element name="opphoerskode" type="tns:kode1" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">E = Eierskifte, S = Selskapsbytte, A = Avregistrert, K = Avregistrert, kanskje solgt, V = Vraket, T = Tyveri, U = Utført, F = Foreldet garanti, X = Trukket garanti</documentation>
+        </annotation>
+      </element>
+      <element name="startdato" type="date">
+        <annotation>
+          <documentation xml:lang="no">Datoen som garantien gjelder fra</documentation>
+        </annotation>
+      </element>
+      <element name="opphoersdato" type="date" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Datoen som garantien gjelder til</documentation>
+        </annotation>
+      </element>
+      <element name="hovedforfall" type="date" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Dato for hovedforfall</documentation>
+        </annotation>
+      </element>
+      <element name="kaskokode" type="tns:int1">
+        <annotation>
+          <documentation xml:lang="no">0 = Ingen kasko, 1 = Delkasko, 2 = Full kasko</documentation>
+        </annotation>
+      </element>
+      <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="StillGarantiType">
+    <sequence>
+      <element name="egenId" type="tns:string36" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Selskapets egen unike ID for garantien. Inntil 36 tegn mhp. evt. UUID</documentation>
+        </annotation>
+      </element>
+      <element name="kjoeretoey" type="tns:StillGarantiKjoeretoeyType"/>
+      <element name="eier" type="tns:FnrOrgnrNavnNillableType"/>
+      <element name="forsikringstaker" type="tns:FnrOrgnrNavnEpostTlfNillableType">
+        <annotation>
+          <documentation xml:lang="no">Forsikringstaker</documentation>
+        </annotation>
+      </element>
+      <element name="forsikringsbehovskode" type="tns:kode1" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">M = Prøvekjennemerke, N = Nyregistrering, E = Eierskifte, P = Påregistrering, S = Selskapsbytte, U = Forsikring av uforsikret kjøretøy, T = Tilbakedatert selskapsbytte</documentation>
+        </annotation>
+      </element>
+      <element name="startdato" type="date" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Datoen som garantien gjelder fra</documentation>
+        </annotation>
+      </element>
+      <element name="hovedforfall" type="date" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Dato for hovedforfall</documentation>
+        </annotation>
+      </element>
+      <element name="kaskokode" type="tns:int1">
+        <annotation>
+          <documentation xml:lang="no">0 = Ingen kasko, 1 = Delkasko, 2 = Full kasko</documentation>
+        </annotation>
+      </element>
+      <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="StillGarantiKjoeretoeyType">
+    <sequence>
+      <group ref="tns:KjennemerkeGroup"/>
+      <element name="understellsnr" type="tns:string19" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">TAD#4, VFTEK#10: Understellsnummer</documentation>
+        </annotation>
+      </element>
+      <element name="regAar" type="gYear" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">TAD#7, VFTEK#18: År for første gangs registrering (Norge / utland)</documentation>
+        </annotation>
+      </element>
+      <element name="merkekode" type="tns:kode4" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">TAD#8, VFTEK#11: Fabrikat, f.eks. 1230 for Audi - jfr. Kodehefte Autosys</documentation>
+        </annotation>
+      </element>
+      <element name="merkenavn" type="tns:string30" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">TAD fabrikatrecord#5: F.eks. Audi eller Mercedes</documentation>
+        </annotation>
+      </element>
+      <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="OppdaterGarantiType">
+    <sequence>
+      <element name="egenId" type="tns:string36" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Selskapets egen unike ID for garantien. Inntil 36 tegn mhp. evt. UUID</documentation>
+        </annotation>
+      </element>
+      <element name="kjoeretoey" type="tns:KjennemerkeType"/>
+      <element name="eier" type="tns:FnrOrgnrType">
+        <annotation>
+          <documentation xml:lang="no">Eiers fødselsnr / orgnr</documentation>
+        </annotation>
+      </element>
+      <element name="forsikringstaker" type="tns:FnrOrgnrNavnEpostTlfNillableType" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Forsikringstaker</documentation>
+        </annotation>
+      </element>
+      <element name="hovedforfall" type="date" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Dato for hovedforfall</documentation>
+        </annotation>
+      </element>
+      <element name="opphoersdato" type="date" minOccurs="0" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">En oppsigelse på vent kan trekkes ved å inkludere feltet og sette det til blankt (xsi:nil="true")</documentation>
+        </annotation>
+      </element>
+      <element name="kaskokode" type="tns:int1">
+        <annotation>
+          <documentation xml:lang="no">0 = Ingen kasko, 1 = Delkasko, 2 = Full kasko</documentation>
+        </annotation>
+      </element>
+      <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="TrekkGarantiType">
+    <sequence>
+      <element name="kjoeretoey" type="tns:KjennemerkeType"/>
+      <element name="eier" type="tns:FnrOrgnrType">
+         <annotation>
+           <documentation xml:lang="no">Eiers fødselsnr / orgnr</documentation>
+         </annotation>
+      </element>
+      <element name="opphoersdato" type="date" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Datoen som garantien gjelder til</documentation>
+        </annotation>
+      </element>
+      <element name="aarsakskode" type="tns:int2">
+        <annotation>
+          <documentation xml:lang="no">Årsakskode for trekking av garanti, jfr. Integrasjonsspesifikasjon</documentation>
+        </annotation>
+      </element>
+      <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="GarantiResponsType">
+    <sequence>
+      <element name="statuskode" type="tns:int4">
+        <annotation>
+          <documentation xml:lang="no">Statuskode</documentation>
+        </annotation>
+      </element>
+      <element name="statustekst" type="tns:string100" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Statustekst</documentation>
+        </annotation>
+      </element>
+      <element name="data" type="tns:GarantiType" nillable="true"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="HentGarantilisteType">
+    <sequence>
+      <element name="utvalgskode" type="tns:kode1">
+        <annotation>
+          <documentation xml:lang="no">V = Garanti på vent, A = Avgis, T = Trukket garanti (oppsigelse) på vent, D = Doble aktive garantier, U = Uforsikret, G = Gjenopptak</documentation>
+        </annotation>
+      </element>
+      <element name="forsikringsbehovskode" type="tns:kode1" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">M = Prøvekjennemerke, N = Nyregistrering, E = Eierskifte, P = Påregistrering, S = Selskapsbytte, U = Forsikring av uforsikret kjøretøy, T = Tilbakedatert selskapsbytte</documentation>
+        </annotation>
+      </element>
+      <element name="opphoerskode" type="tns:kode1" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">E = Eierskifte, S = Selskapsbytte, A = Avregistrert, K = Avregistrert, kanskje solgt, V = Vraket, T = Tyveri, U = Utført, F = Foreldet garanti, X = Trukket garanti</documentation>
+        </annotation>
+      </element>
+      <element name="selskapskode" type="tns:kode4">
+        <annotation>
+          <documentation xml:lang="no">Kode for forsikringsselskap</documentation>
+        </annotation>
+      </element>
+      <element name="fraDato" type="date" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Tidligste start- eller opphørsdato (fra og med)</documentation>
+        </annotation>
+      </element>
+      <element name="tilDato" type="date" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Seneste start- eller opphørsdato (til og med)</documentation>
+        </annotation>
+      </element>
+      <element name="sidenummer" type="int" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Sidenummer, nummerert fra 1</documentation>
+        </annotation>
+      </element>
+      <element name="antallPerSide" type="int" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Maksimalt antall treff per side</documentation>
+        </annotation>
+      </element>
+      <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="GarantilisteType">
+    <sequence>
+      <element name="statuskode" type="tns:int4">
+        <annotation>
+          <documentation xml:lang="no">Statuskode</documentation>
+        </annotation>
+      </element>
+      <element name="statustekst" type="tns:string100" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Statustekst</documentation>
+        </annotation>
+      </element>
+      <element name="data" type="tns:GarantierType" nillable="true"/>
+      <any maxOccurs="unbounded" minOccurs="0" processContents="lax"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="HentMeldingsloggType">
+    <sequence>
+      <element name="meldingstyper" nillable="true">
+        <complexType>
+          <sequence>
+            <element name="meldingstype" type="tns:kode3" minOccurs="0" maxOccurs="10">
+              <annotation>
+                <documentation xml:lang="no">T01 = Ny garanti (evt. med feilmelding), T02 = Trukket garanti (evt. med feilmelding), T03 = Endret garanti (evt. med feilmelding), S01 = Garanti som har blitt aktiv, S02 = Garanti som er opphørt, E01 = Endret kjennemerke, E02 = Endret avgiftsgruppe, E03 = Endret fødselsnummer, G01 = Ønske fra nytt selskap om tilbakedatering av selskapsbytte, G02 = Ønske fra forrige selskap om gjenopptak av forsikring</documentation>
+              </annotation>
+            </element>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="meldingsfeil" type="boolean" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Angir om feilede meldinger skal vises</documentation>
+        </annotation>
+      </element>
+      <element name="fraMeldingsId" type="long" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Fra og med meldings-ID (oppgi siste meldings-ID + 1 for å hente alle nye meldinger)</documentation>
+        </annotation>
+      </element>
+      <element name="tilMeldingsId" type="long" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Til og med meldings-ID</documentation>
+        </annotation>
+      </element>
+      <element name="fraDato" type="date" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Fra og med dato</documentation>
+        </annotation>
+      </element>
+      <element name="tilDato" type="date" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Til og med dato</documentation>
+        </annotation>
+      </element>
+      <element name="sidenummer" type="int" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Sidenummer, nummerert fra 1</documentation>
+        </annotation>
+      </element>
+      <element name="antallPerSide" type="int" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Maksimalt antall treff per side</documentation>
+        </annotation>
+      </element>
+      <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="MeldingsloggType">
+    <sequence>
+      <element name="statuskode" type="tns:int4">
+        <annotation>
+          <documentation xml:lang="no">Statuskode</documentation>
+        </annotation>
+      </element>
+      <element name="statustekst" type="tns:string100" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Statustekst</documentation>
+        </annotation>
+      </element>
+      <element name="data" type="tns:MeldingsloggDataType" nillable="true"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="MeldingsloggDataType">
+    <sequence>
+      <element name="melding" type="tns:MeldingsloggMeldingType" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="MeldingsloggMeldingType">
+    <sequence>
+      <element name="meldingsId" type="long">
+        <annotation>
+          <documentation xml:lang="no">Meldings-ID</documentation>
+        </annotation>
+      </element>
+      <element name="meldingstype" type="tns:kode3">
+        <annotation>
+          <documentation xml:lang="no">T01 = Ny garanti (evt. med feilmelding), T02 = Trukket garanti (evt. med feilmelding), S01 = Garanti som har blitt aktiv, S02 = Garanti som er opphørt, E01 = Endret kjennemerke, E02 = Endret avgiftsgruppe, G01 = Ønske fra nytt selskap om tilbakedatering av selskapsbytte, G02 = Ønske fra forrige selskap om gjenopptak av forsikring</documentation>
+        </annotation>
+      </element>
+      <element name="meldingstid" type="dateTime">
+        <annotation>
+          <documentation xml:lang="no">Tidspunkt for når meldingen ble mottatt</documentation>
+        </annotation>
+      </element>
+      <element name="statuskode" type="tns:int4">
+        <annotation>
+          <documentation xml:lang="no">Statuskode</documentation>
+        </annotation>
+      </element>
+      <element name="statustekst" type="tns:string100" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Statustekst</documentation>
+        </annotation>
+      </element>
+      <element name="kjoeretoey" type="tns:MeldingsloggKjoeretoeyType" nillable="true"/>
+      <element name="personEnhet" type="tns:MeldingsloggPersonEnhetType" nillable="true"/>
+      <element name="garanti" type="tns:GarantiType" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Garantidata</documentation>
+        </annotation>
+      </element>
+      <element name="endretStartdato" type="boolean" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Angir om ønsket startdato for ny garanti er endret</documentation>
+        </annotation>
+      </element>
+      <element name="overtakendeSelskap" type="tns:SelskapType" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Overtakende selskap ved selskapsbytte</documentation>
+        </annotation>
+      </element>
+      <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="MeldingsloggKjoeretoeyType">
+    <sequence>
+      <group ref="tns:KjennemerkeGroup"/>
+      <element name="kjennemerkefarge" type="tns:int1" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">TAD#32, VFTEK#6: 0 = Hvit, 1 = Svart, 2 = Rød, 3 = Blå, 4 = Grønn, 5 = Rally</documentation>
+        </annotation>
+      </element>
+      <element name="personligKjennemerke" type="tns:string15" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Personlig kjennemerke</documentation>
+        </annotation>
+      </element>
+      <element name="forrigeKjennemerke" type="tns:string15" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Forrige kjennemerke</documentation>
+        </annotation>
+      </element>
+      <element name="regAar" type="gYear" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">TAD#7, VFTEK#18: År for første gangs registrering (Norge / utland)</documentation>
+        </annotation>
+      </element>
+      <element name="regDatoNorge" type="date" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">TAD#16 (recordtype 50): Dato for første gangs registrering i Norge</documentation>
+        </annotation>
+      </element>
+      <element name="avregDato" type="date" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">TAD#31: Avregistrert dato</documentation>
+        </annotation>
+      </element>
+      <element name="vraketDato" type="date" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">TAD#64 (recordtype 56): Vraket dato</documentation>
+        </annotation>
+      </element>
+      <element name="stjaaletDato" type="date" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">TAD#52, TAD#16 (recordtype 64, 54): Stjålet dato</documentation>
+        </annotation>
+      </element>
+      <element name="utfoertDato" type="date" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">TAD#53: Utført dato</documentation>
+        </annotation>
+      </element>
+      <element name="understellsnr" type="tns:string19" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">TAD#4, VFTEK#10: Understellsnummer</documentation>
+        </annotation>
+      </element>
+      <element name="merkekode" type="tns:kode4" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">TAD#8, VFTEK#11: Fabrikat, f.eks. 1230 for Audi - jfr. Kodehefte Autosys</documentation>
+        </annotation>
+      </element>
+      <element name="merkenavn" type="tns:string30" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">TAD fabrikatrecord#5: F.eks. Audi eller Mercedes</documentation>
+        </annotation>
+      </element>
+      <element name="kjoeretoeygruppe" type="tns:int3" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">TAD#14, VFTEK#20: Kjøretøygruppe, avgift</documentation>
+        </annotation>
+      </element>
+      <element name="brukskode" type="tns:int2" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">TAD#15: Kode for kjøringens art, jfr. Kodehefte Autosys</documentation>
+        </annotation>
+      </element>
+      <element name="avgiftsgruppe" type="tns:kode2" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Kode for avgiftsgruppe</documentation>
+        </annotation>
+      </element>
+      <element name="avgiftsgruppeFraDato" type="date" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Dato som avgiftsgruppen gjelder fra, mhp. tilbakedatert endring av avgiftsgruppe pga. omregistrering</documentation>
+        </annotation>
+      </element>
+      <element name="forrigeAvgiftsgruppe" type="tns:kode2" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Kode for forrige avgiftsgruppe</documentation>
+        </annotation>
+      </element>
+      <element name="dagsats" type="tns:decimal6_2" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Dagsats for TA, i norske kroner</documentation>
+        </annotation>
+      </element>
+      <element name="eier" type="tns:FnrOrgnrNavnType">
+        <annotation>
+          <documentation xml:lang="no">Data om eier</documentation>
+        </annotation>
+      </element>
+      <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="MeldingsloggPersonEnhetType">
+    <sequence>
+      <group ref="tns:FnrOrgnrGroup"/>
+      <element name="forrigeFnrOrgnr" type="tns:string11" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Forrige fødselsnr</documentation>
+        </annotation>
+      </element>
+      <group ref="tns:NavnGroup"/>
+      <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="HentForsikretType">
+    <sequence>
+      <group ref="tns:KjennemerkeGroup"/>
+      <element name="forsikretDato" type="date" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Dato for ansvarlig selskap / forsikringsstatus</documentation>
+        </annotation>
+      </element>
+      <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="ForsikretType">
+    <sequence>
+      <element name="statuskode" type="tns:int4">
+        <annotation>
+          <documentation xml:lang="no">Statuskode</documentation>
+        </annotation>
+      </element>
+      <element name="statustekst" type="tns:string100" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Statustekst</documentation>
+        </annotation>
+      </element>
+      <element name="data" type="tns:ForsikretDataType" nillable="true"/>
+      <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="ForsikretKjoeretoeyType">
+    <sequence>
+      <group ref="tns:KjennemerkeGroup"/>
+      <element name="merkekode" type="tns:kode4" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">TAD#8, VFTEK#11: Fabrikat, f.eks. 1230 for Audi - jfr. Kodehefte Autosys</documentation>
+        </annotation>
+      </element>
+      <element name="merkenavn" type="tns:string30" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">TAD fabrikatrecord#5: F.eks. Audi eller Mercedes</documentation>
+        </annotation>
+      </element>
+      <element name="begjaertAvskiltet" type="boolean" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Angir om kjøretøyet er begjært avskiltet</documentation>
+        </annotation>
+      </element>
+      <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="ForsikretDataType">
+    <sequence>
+      <element name="kjoeretoey" type="tns:ForsikretKjoeretoeyType" nillable="true"/>
+      <element name="selskap" type="tns:SelskapType">
+        <annotation>
+          <documentation xml:lang="no">Forsikringsselskap</documentation>
+        </annotation>
+      </element>
+      <element name="forsikret" type="tns:kode1">
+        <annotation>
+          <documentation xml:lang="no">F = Forsikret, U = Uforsikret, A = Avregistrert, S = Stjålet, V = Vraket</documentation>
+        </annotation>
+      </element>
+      <element name="kaskokode" type="tns:int1">
+        <annotation>
+          <documentation xml:lang="no">0 = Ingen kasko, 1 = Delkasko, 2 = Full kasko</documentation>
+        </annotation>
+      </element>
+      <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="BeregnAvgiftsgruppeType">
+    <sequence>
+      <element name="typeBruk" type="tns:kode1" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">V = Vanlig bruk (default), D = Drosje, begravelsesbil, likbil, rallykjøretøy, veterankjøretøy, trekkbil, S = Svalbard, ambassase, NATO, Nordisk investeringsbank</documentation>
+        </annotation>
+      </element>
+      <element name="typeKjoeretoey" type="tns:kode1" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">B = Bil eller buss (default), M = Motorsykkel, A = Annet (moped, traktor, snøscooter, etc.)</documentation>
+        </annotation>
+      </element>
+      <element name="typeDrivstoff" type="tns:kode1" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">D = Bensin eller diesel med fabrikkmontert partikkelfilter (default), U = Diesel uten fabrikkmontert partikkelfilter, E = Elbil inkludert hydrogen med brenselcelle</documentation>
+        </annotation>
+      </element>
+      <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="AvgiftsgruppeType">
+    <sequence>
+      <element name="statuskode" type="tns:int4">
+        <annotation>
+          <documentation xml:lang="no">Statuskode</documentation>
+        </annotation>
+      </element>
+      <element name="statustekst" type="tns:string100" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Statustekst</documentation>
+        </annotation>
+      </element>
+      <element name="data" type="tns:AvgiftsgruppeDataType" nillable="true"/>
+      <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="AvgiftsgruppeDataType">
+    <sequence>
+      <element name="avgiftsgruppe" type="tns:kode2">
+        <annotation>
+          <documentation xml:lang="no">Kode for avgiftsgruppe</documentation>
+        </annotation>
+      </element>
+      <element name="dagsats" type="tns:decimal6_2">
+        <annotation>
+          <documentation xml:lang="no">Dagsats for TA, i norske kroner</documentation>
+        </annotation>
+      </element>
+      <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="SkrivBrukerType">
+    <sequence>
+      <element name="brukerId" type="tns:string20">
+        <annotation>
+          <documentation xml:lang="no">Bruker-ID</documentation>
+        </annotation>
+      </element>
+      <element name="rolleId" type="tns:string20">
+        <annotation>
+          <documentation xml:lang="no">Rolle-ID</documentation>
+        </annotation>
+      </element>
+      <group ref="tns:NavnGroup"/>
+      <group ref="tns:EpostTlfGroup"/>
+      <element name="ipfilter" type="tns:string100" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Tillatte IP-adresser eller -subnett i CIDR-notasjon, skilt med mellomrom</documentation>
+        </annotation>
+      </element>
+      <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="SlettBrukerType">
+    <sequence>
+      <element name="brukerId" type="tns:string20">
+        <annotation>
+          <documentation xml:lang="no">Bruker-ID</documentation>
+        </annotation>
+      </element>
+      <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="BrukerResponsType">
+    <sequence>
+      <element name="statuskode" type="tns:int4">
+        <annotation>
+          <documentation xml:lang="no">Statuskode</documentation>
+        </annotation>
+      </element>
+      <element name="statustekst" type="tns:string100" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Statustekst</documentation>
+        </annotation>
+      </element>
+      <element name="data" type="tns:BrukerDataType" nillable="true"/>
+      <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="BrukerDataType">
+    <sequence>
+      <element name="brukerId" type="tns:string20">
+        <annotation>
+          <documentation xml:lang="no">Bruker-ID</documentation>
+        </annotation>
+      </element>
+      <element name="statuskode" type="tns:kode1">
+        <annotation>
+          <documentation xml:lang="no">A = Aktiv, S = Slettet, P = Sperret pga. passordfeil, I = Sperret pga. inaktivitet</documentation>
+        </annotation>
+      </element>
+      <element name="rolleId" type="tns:string20">
+        <annotation>
+          <documentation xml:lang="no">Rolle-ID</documentation>
+        </annotation>
+      </element>
+      <group ref="tns:NavnGroup"/>
+      <group ref="tns:EpostTlfGroup"/>
+      <element name="ipfilter" type="tns:string100" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Tillatte IP-adresser eller -subnett i CIDR-notasjon, skilt med mellomrom</documentation>
+        </annotation>
+      </element>
+      <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+    </sequence>
+  </complexType>
+
+  <group name="FnrOrgnrGroup">
+    <sequence>
+      <element name="fnrOrgnr" type="tns:string11">
+        <annotation>
+          <documentation xml:lang="no">TAD#9: Fødselsnr / orgnr</documentation>
+        </annotation>
+      </element>
+    </sequence>
+  </group>
+
+  <group name="NavnGroup">
+    <sequence>
+      <element name="navn" type="tns:string100">
+        <annotation>
+          <documentation xml:lang="no">Navn</documentation>
+        </annotation>
+      </element>
+    </sequence>
+  </group>
+
+  <group name="NavnNillableGroup">
+    <sequence>
+      <element name="navn" type="tns:string100" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Navn</documentation>
+        </annotation>
+      </element>
+    </sequence>
+  </group>
+
+  <group name="AdresseGroup">
+    <sequence>
+      <element name="adresse" type="tns:string40">
+        <annotation>
+          <documentation xml:lang="no">TAD#11: Adresse</documentation>
+        </annotation>
+      </element>
+      <element name="postnr" type="tns:string4">
+        <annotation>
+          <documentation xml:lang="no">TAD#12: Postnummer</documentation>
+        </annotation>
+      </element>
+      <element name="poststed" type="tns:string40">
+        <annotation>
+          <documentation xml:lang="no">Poststed</documentation>
+        </annotation>
+      </element>
+    </sequence>
+  </group>
+
+  <group name="EpostTlfGroup">
+    <sequence>
+      <element name="epost" type="tns:string254">
+        <annotation>
+          <documentation xml:lang="no">Epostadresse</documentation>
+        </annotation>
+      </element>
+      <element name="tlfnr" type="tns:string15">
+        <annotation>
+          <documentation xml:lang="no">Telefonnummer</documentation>
+        </annotation>
+      </element>
+    </sequence>
+  </group>
+
+  <group name="EpostTlfNillableGroup">
+    <sequence>
+      <element name="epost" type="tns:string254" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Epostadresse</documentation>
+        </annotation>
+      </element>
+      <element name="tlfnr" type="tns:string15" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Telefonnummer</documentation>
+        </annotation>
+      </element>
+    </sequence>
+  </group>
+
+  <complexType name="FnrOrgnrType">
+    <sequence>
+      <group ref="tns:FnrOrgnrGroup"/>
+      <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="FnrOrgnrNavnType">
+    <sequence>
+      <group ref="tns:FnrOrgnrGroup"/>
+      <group ref="tns:NavnGroup"/>
+      <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="FnrOrgnrNavnNillableType">
+    <sequence>
+      <group ref="tns:FnrOrgnrGroup"/>
+      <group ref="tns:NavnNillableGroup"/>
+      <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="FnrOrgnrNavnEpostTlfNillableType">
+    <sequence>
+      <group ref="tns:FnrOrgnrGroup"/>
+      <group ref="tns:NavnGroup"/>
+      <group ref="tns:EpostTlfNillableGroup"/>
+      <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="RollehaverType">
+    <sequence>
+      <element name="fraDato" type="date" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">TAD#16 (recordtype 51/52): Dato for eierskifte / dato for om- eller påregistrering ny eier</documentation>
+        </annotation>
+      </element>
+      <group ref="tns:FnrOrgnrGroup"/>
+      <group ref="tns:NavnGroup"/>
+      <group ref="tns:AdresseGroup"/>
+      <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+    </sequence>
+  </complexType>
+
+  <element name="hentKjoeretoeyliste" type="tns:HentKjoeretoeylisteType">
+    <annotation>
+      <documentation xml:lang="no">
+        Input til søk etter kjøretøy eid eller forsikret av person eller foretak.
+      </documentation>
+      <documentation xml:lang="en">
+        Input to search for vehicles owned or insured by person or company.
+      </documentation>
+    </annotation>
+  </element>
+
+  <element name="Kjoeretoeyliste" type="tns:KjoeretoeylisteType">
+    <annotation>
+      <documentation xml:lang="no">
+        Liste over kjøretøy.
+      </documentation>
+      <documentation xml:lang="en">
+        List of vehichent.
+      </documentation>
+    </annotation>
+  </element>
+
+  <element name="hentKjoeretoeydata" type="tns:KjennemerkeType">
+    <annotation>
+      <documentation xml:lang="no">
+        Spørring for visning av tekniske data, eier, og forsikringsdata for angitt kjøretøy.
+      </documentation>
+      <documentation xml:lang="en">
+        Request to show technical data, owner, and insurance data for the specified vehicle.
+      </documentation>
+    </annotation>
+  </element>
+
+  <element name="Kjoeretoeydata" type="tns:KjoeretoeydataType">
+    <annotation>
+      <documentation xml:lang="no">
+        Tekniske data, eier, og forsikringsdata for kjøretøy.
+      </documentation>
+      <documentation xml:lang="en">
+        Technical data, owner, and insurance data for vehicle.
+      </documentation>
+    </annotation>
+  </element>
+
+  <element name="stillGaranti" type="tns:StillGarantiType">
+    <annotation>
+      <documentation xml:lang="no">
+        Data for stilling av ny garanti.
+      </documentation>
+      <documentation xml:lang="en">
+        Data to provide new guarantee.
+      </documentation>
+    </annotation>
+  </element>
+
+  <element name="oppdaterGaranti" type="tns:OppdaterGarantiType">
+    <annotation>
+      <documentation xml:lang="no">
+        Nye data for eksisterende garanti.
+      </documentation>
+      <documentation xml:lang="en">
+        New data for existing guarantee.
+      </documentation>
+    </annotation>
+  </element>
+
+  <element name="trekkGaranti" type="tns:TrekkGarantiType">
+    <annotation>
+      <documentation xml:lang="no">
+        Data for trekking av eksisterende garanti.
+      </documentation>
+      <documentation xml:lang="en">
+        Data to revoke existing guarantee.
+      </documentation>
+    </annotation>
+  </element>
+
+  <element name="Garanti" type="tns:GarantiResponsType">
+    <annotation>
+      <documentation xml:lang="no">
+        Data for garanti.
+      </documentation>
+      <documentation xml:lang="en">
+        Data for guarantee.
+      </documentation>
+    </annotation>
+  </element>
+
+  <element name="hentGarantiliste" type="tns:HentGarantilisteType">
+    <annotation>
+      <documentation xml:lang="no">
+        Søkekriterier for visning av garantier.
+      </documentation>
+      <documentation xml:lang="en">
+        Search criteria for retrieval of guarantees.
+      </documentation>
+    </annotation>
+  </element>
+
+  <element name="Garantiliste" type="tns:GarantilisteType">
+    <annotation>
+      <documentation xml:lang="no">
+        Liste over garantier som svarer til angitte kriterier.
+      </documentation>
+      <documentation xml:lang="en">
+        List of guarantees matching specified criteria.
+      </documentation>
+    </annotation>
+  </element>
+
+  <element name="hentMeldingslogg" type="tns:HentMeldingsloggType">
+    <annotation>
+      <documentation xml:lang="no">
+        Søkekriterier for visning av meldinger i meldingslogg.
+      </documentation>
+      <documentation xml:lang="en">
+        Search criteria for retrieval of messages in message log.
+      </documentation>
+    </annotation>
+  </element>
+
+  <element name="Meldingslogg" type="tns:MeldingsloggType">
+    <annotation>
+      <documentation xml:lang="no">
+        Søkekriterier for visning av meldingslogg.
+      </documentation>
+      <documentation xml:lang="en">
+        Search criteria for retrieval of messages in message log.
+      </documentation>
+    </annotation>
+  </element>
+
+  <element name="hentForsikret" type="tns:HentForsikretType">
+    <annotation>
+      <documentation xml:lang="no">
+        Input for å vise ansvarlig selskap / forsikringsstatus for et kjøretøy på et gitt tidspunkt.
+      </documentation>
+      <documentation xml:lang="en">
+        Input to show the responsible insurance company / insurance status for a vehicle on a given date.
+      </documentation>
+    </annotation>
+  </element>
+
+  <element name="Forsikret" type="tns:ForsikretType">
+    <annotation>
+      <documentation xml:lang="no">
+        Ansvarlig selskap / forsikringsstatus for et kjøretøy.
+      </documentation>
+      <documentation xml:lang="en">
+        The responsible insurance company / insurance status for a vehicle.
+      </documentation>
+    </annotation>
+  </element>
+
+  <element name="beregnAvgiftsgruppe" type="tns:BeregnAvgiftsgruppeType">
+    <annotation>
+      <documentation xml:lang="no">
+        Beregn avgiftsgruppe basert på overordnet informasjon om kjøretøy.
+      </documentation>
+      <documentation xml:lang="en">
+        Determine tax group based on key information on vehicle.
+      </documentation>
+    </annotation>
+  </element>
+
+  <element name="Avgiftsgruppe" type="tns:AvgiftsgruppeType">
+    <annotation>
+      <documentation xml:lang="no">
+        Beregnet avgiftsgruppe.
+      </documentation>
+      <documentation xml:lang="en">
+        Determined tax group.
+      </documentation>
+    </annotation>
+  </element>
+
+  <element name="opprettBruker" type="tns:SkrivBrukerType">
+    <annotation>
+      <documentation xml:lang="no">
+        Opprett ny bruker.
+      </documentation>
+      <documentation xml:lang="en">
+        Create new user.
+      </documentation>
+    </annotation>
+  </element>
+
+  <element name="oppdaterBruker" type="tns:SkrivBrukerType">
+    <annotation>
+      <documentation xml:lang="no">
+        Endre eksisterende bruker.
+      </documentation>
+      <documentation xml:lang="en">
+        Change existing user.
+      </documentation>
+    </annotation>
+  </element>
+
+  <element name="slettBruker" type="tns:SlettBrukerType">
+    <annotation>
+      <documentation xml:lang="no">
+        Slett eksisterende bruker.
+      </documentation>
+      <documentation xml:lang="en">
+        Delete existing user.
+      </documentation>
+    </annotation>
+  </element>
+
+  <element name="Bruker" type="tns:BrukerResponsType">
+    <annotation>
+      <documentation xml:lang="no">
+        Data for bruker.
+      </documentation>
+      <documentation xml:lang="en">
+        Data for user.
+      </documentation>
+    </annotation>
+  </element>
+
+  <element name="Autentisering">
+    <annotation>
+      <documentation xml:lang="no">
+        Delegert autentisering av bruker via fagsystem (systembruker).
+      </documentation>
+    </annotation>
+    <complexType>
+      <sequence>
+        <element name="selskapskode" type="tns:kode4">
+          <annotation>
+            <documentation xml:lang="no">Kode for forsikringsselskap</documentation>
+          </annotation>
+        </element>
+        <element name="systemnavn" type="tns:string20">
+          <annotation>
+            <documentation xml:lang="no">Navn på fagapplikasjon</documentation>
+          </annotation>
+        </element>
+        <element name="systembrukerId" type="tns:string20">
+          <annotation>
+            <documentation xml:lang="no">Bruker-ID for systembruker</documentation>
+          </annotation>
+        </element>
+        <element name="systempassord" type="tns:string100">
+          <annotation>
+            <documentation xml:lang="no">Passord for systembruker</documentation>
+          </annotation>
+        </element>
+        <element name="brukerId" type="tns:string20">
+          <annotation>
+            <documentation xml:lang="no">Bruker-ID som autentiseringen skal utføres på vegne av</documentation>
+          </annotation>
+        </element>
+        <any maxOccurs="unbounded" minOccurs="0" processContents="lax"/>
+      </sequence>
+    </complexType>
+  </element>
+
+  <element name="Feil">
+    <annotation>
+      <documentation xml:lang="no">
+        Feilmelding ved SOAP Fault.
+      </documentation>
+      <documentation xml:lang="en">
+        Error message on SOAP Fault.
+      </documentation>
+    </annotation>
+    <complexType>
+      <sequence>
+        <element name="statuskode" type="tns:int4"/>
+        <element name="statustekst" type="tns:string100"/>
+        <element name="feilmelding" type="string"/>
+        <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+      </sequence>
+    </complexType>
+  </element>
+
+</schema>
