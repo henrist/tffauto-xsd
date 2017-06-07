@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<schema targetNamespace="https://tffauto.no/xml/TFFAuto/2017-03-01/TFFAuto.xsd"
-        xmlns:tns="https://tffauto.no/xml/TFFAuto/2017-03-01/TFFAuto.xsd"
+<schema targetNamespace="https://tffauto.no/xml/TFFAuto/2017-05-11/TFFAuto.xsd"
+        xmlns:tns="https://tffauto.no/xml/TFFAuto/2017-05-11/TFFAuto.xsd"
         xmlns="http://www.w3.org/2001/XMLSchema"
         elementFormDefault="unqualified">
   <annotation>
@@ -203,9 +203,31 @@
     </sequence>
   </group>
 
+  <group name="KjennemerkeLandkodeGroup">
+    <sequence>
+      <element name="kjennemerke" type="tns:string15">
+        <annotation>
+          <documentation xml:lang="no">TAD#3, VFTEK#5: Kjennemerke</documentation>
+        </annotation>
+      </element>
+      <element name="kjennemerkelandkode" type="tns:kode3">
+        <annotation>
+          <documentation xml:lang="no">Landkode ihht. ISO-3166-1 alpha-3</documentation>
+        </annotation>
+      </element>
+    </sequence>
+  </group>
+
   <complexType name="KjennemerkeType">
     <sequence>
       <group ref="tns:KjennemerkeGroup"/>
+      <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="KjennemerkeLandkodeType">
+    <sequence>
+      <group ref="tns:KjennemerkeLandkodeGroup"/>
       <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
     </sequence>
   </complexType>
@@ -272,7 +294,7 @@
 
   <complexType name="KjoeretoeylisteKjoeretoeyType">
     <sequence>
-      <group ref="tns:KjennemerkeGroup"/>
+      <group ref="tns:KjennemerkeLandkodeGroup"/>
       <element name="personligKjennemerke" type="tns:string15" nillable="true">
         <annotation>
           <documentation xml:lang="no">Personlig kjennemerke</documentation>
@@ -338,7 +360,7 @@
     <sequence>
       <element name="garantistatus" type="tns:kode1">
         <annotation>
-          <documentation xml:lang="no">U = Uforsikret, I = Ikke forsikringsplikt, S = Selvassuranse, V = Garanti på vent, A = Aktiv garanti</documentation>
+          <documentation xml:lang="no">U = Uforsikret, K = Korrigert uforsikret, E = Ikke forsikret av eier, I = Ikke forsikringsplikt, S = Selvassuranse, V = Garanti på vent, A = Aktiv garanti</documentation>
         </annotation>
       </element>
       <element name="eier" type="tns:FnrOrgnrNavnType">
@@ -378,7 +400,7 @@
 
   <complexType name="KjoeretoeydataDataType">
     <sequence>
-      <group ref="tns:KjennemerkeGroup"/>
+      <group ref="tns:KjennemerkeLandkodeGroup"/>
       <element name="kjennemerkefarge" type="tns:int1" nillable="true">
         <annotation>
           <documentation xml:lang="no">TAD#32, VFTEK#6: 0 = Hvit, 1 = Svart, 2 = Rød, 3 = Blå, 4 = Grønn, 5 = Rally</documentation>
@@ -476,7 +498,7 @@
       </element>
       <element name="dagsats" type="tns:decimal6_2" nillable="true">
         <annotation>
-          <documentation xml:lang="no">Dagsats for TA, i norske kroner</documentation>
+          <documentation xml:lang="no">Dagsats for TFA, i norske kroner</documentation>
         </annotation>
       </element>
       <element name="kmstandBruktimportert" type="tns:int7" nillable="true">
@@ -497,17 +519,17 @@
       <element name="medeiere" nillable="true">
         <complexType>
           <sequence>
-            <element name="medeier" type="tns:FnrOrgnrType" minOccurs="0" maxOccurs="unbounded">
+            <element name="medeier" type="tns:FnrOrgnrNillableNavnNillableType" minOccurs="0" maxOccurs="unbounded">
               <annotation>
-                <documentation xml:lang="no">Medeiers fødselsnr / orgnr</documentation>
+                <documentation xml:lang="no">Medeier</documentation>
               </annotation>
             </element>
           </sequence>
         </complexType>
       </element>
-      <element name="leietaker" type="tns:FnrOrgnrType" nillable="true">
+      <element name="leietaker" type="tns:FnrOrgnrNavnNillableType" nillable="true">
         <annotation>
-          <documentation xml:lang="no">Leietakers fødselsnr / orgnr</documentation>
+          <documentation xml:lang="no">Leietaker</documentation>
         </annotation>
       </element>
       <element name="teknisk" type="tns:TekniskType">
@@ -515,7 +537,7 @@
           <documentation xml:lang="no">Tekniske data</documentation>
         </annotation>
       </element>
-      <element name="garantier" type="tns:GarantierType">
+      <element name="garantier" type="tns:KjoeretoeyDataGarantierType">
         <annotation>
           <documentation xml:lang="no">Garantier</documentation>
         </annotation>
@@ -870,7 +892,7 @@
     </sequence>
   </complexType>
 
-  <complexType name="GarantierType">
+  <complexType name="KjoeretoeyDataGarantierType">
     <sequence>
       <element name="garanti" type="tns:GarantiType" minOccurs="1" maxOccurs="unbounded">
         <annotation>
@@ -887,7 +909,7 @@
           <documentation xml:lang="no">Selskapets egen unike ID for garantien. Inntil 36 tegn mhp. evt. UUID</documentation>
         </annotation>
       </element>
-      <element name="kjoeretoey" type="tns:KjennemerkeType"/>
+      <element name="kjoeretoey" type="tns:KjennemerkeLandkodeType"/>
       <element name="eier" type="tns:FnrOrgnrNavnType">
         <annotation>
           <documentation xml:lang="no">Eier</documentation>
@@ -905,7 +927,7 @@
       </element>
       <element name="garantistatus" type="tns:kode1">
         <annotation>
-          <documentation xml:lang="no">U = Uforsikret, I = Ikke forsikringsplikt, S = Selvassuranse, V = Garanti på vent, A = Aktiv garanti</documentation>
+          <documentation xml:lang="no">U = Uforsikret, K = Korrigert uforsikret, E = Ikke forsikret av eier, I = Ikke forsikringsplikt, S = Selvassuranse, V = Garanti på vent, A = Aktiv garanti</documentation>
         </annotation>
       </element>
       <element name="forsikringsbehovskode" type="tns:kode1">
@@ -928,12 +950,17 @@
           <documentation xml:lang="no">Datoen som garantien gjelder til</documentation>
         </annotation>
       </element>
+      <element name="aarsakskode" type="tns:int2" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Årsakskode for trekking av garanti, jfr. Integrasjonsspesifikasjon</documentation>
+        </annotation>
+      </element>
       <element name="hovedforfall" type="date" nillable="true">
         <annotation>
           <documentation xml:lang="no">Dato for hovedforfall</documentation>
         </annotation>
       </element>
-      <element name="kaskokode" type="tns:int1">
+      <element name="kaskokode" type="tns:int1" nillable="true">
         <annotation>
           <documentation xml:lang="no">0 = Ingen kasko, 1 = Delkasko, 2 = Full kasko</documentation>
         </annotation>
@@ -951,7 +978,7 @@
       </element>
       <element name="kjoeretoey" type="tns:StillGarantiKjoeretoeyType"/>
       <element name="eier" type="tns:FnrOrgnrNavnNillableType"/>
-      <element name="forsikringstaker" type="tns:FnrOrgnrNavnEpostTlfNillableType">
+      <element name="forsikringstaker" type="tns:FnrOrgnrNavnNillableEpostTlfNillableType">
         <annotation>
           <documentation xml:lang="no">Forsikringstaker</documentation>
         </annotation>
@@ -1030,9 +1057,9 @@
           <documentation xml:lang="no">Dato for hovedforfall</documentation>
         </annotation>
       </element>
-      <element name="opphoersdato" type="date" minOccurs="0" nillable="true">
+      <element name="opphoersdato" type="date" nillable="true">
         <annotation>
-          <documentation xml:lang="no">En oppsigelse på vent kan trekkes ved å inkludere feltet og sette det til blankt (xsi:nil="true")</documentation>
+          <documentation xml:lang="no">En oppsigelse på vent kan trekkes ved å sette feltet til blankt (xsi:nil="true")</documentation>
         </annotation>
       </element>
       <element name="kaskokode" type="tns:int1">
@@ -1099,7 +1126,7 @@
           <documentation xml:lang="no">E = Eierskifte, S = Selskapsbytte, A = Avregistrert, K = Avregistrert, kanskje solgt, V = Vraket, T = Tyveri, U = Utført, F = Foreldet garanti, X = Trukket garanti</documentation>
         </annotation>
       </element>
-      <element name="selskapskode" type="tns:kode4">
+      <element name="selskapskode" type="tns:kode4" nillable="true">
         <annotation>
           <documentation xml:lang="no">Kode for forsikringsselskap</documentation>
         </annotation>
@@ -1140,8 +1167,18 @@
           <documentation xml:lang="no">Statustekst</documentation>
         </annotation>
       </element>
-      <element name="data" type="tns:GarantierType" nillable="true"/>
+      <element name="data" type="tns:GarantilisteGarantierType" nillable="true"/>
       <any maxOccurs="unbounded" minOccurs="0" processContents="lax"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="GarantilisteGarantierType">
+    <sequence>
+      <element name="garanti" type="tns:GarantiType" minOccurs="0" maxOccurs="unbounded">
+        <annotation>
+          <documentation xml:lang="no">Garantidata</documentation>
+        </annotation>
+      </element>
     </sequence>
   </complexType>
 
@@ -1152,7 +1189,7 @@
           <sequence>
             <element name="meldingstype" type="tns:kode3" minOccurs="0" maxOccurs="10">
               <annotation>
-                <documentation xml:lang="no">T01 = Ny garanti (evt. med feilmelding), T02 = Trukket garanti (evt. med feilmelding), T03 = Endret garanti (evt. med feilmelding), S01 = Garanti som har blitt aktiv, S02 = Garanti som er opphørt, E01 = Endret kjennemerke, E02 = Endret avgiftsgruppe, E03 = Endret fødselsnummer, G01 = Ønske fra nytt selskap om tilbakedatering av selskapsbytte, G02 = Ønske fra forrige selskap om gjenopptak av forsikring</documentation>
+                <documentation xml:lang="no">T01 = Ny garanti (evt. med feilmelding), T02 = Trukket garanti (evt. med feilmelding), T03 = Endret garanti (evt. med feilmelding), S01 = Garanti som har blitt aktiv, S02 = Garanti som er opphørt, E01 = Endret kjennemerke, E02 = Endret avgiftsgruppe, E03 = Endret fødselsnummer, navn eller adresse</documentation>
               </annotation>
             </element>
           </sequence>
@@ -1228,7 +1265,7 @@
       </element>
       <element name="meldingstype" type="tns:kode3">
         <annotation>
-          <documentation xml:lang="no">T01 = Ny garanti (evt. med feilmelding), T02 = Trukket garanti (evt. med feilmelding), S01 = Garanti som har blitt aktiv, S02 = Garanti som er opphørt, E01 = Endret kjennemerke, E02 = Endret avgiftsgruppe, G01 = Ønske fra nytt selskap om tilbakedatering av selskapsbytte, G02 = Ønske fra forrige selskap om gjenopptak av forsikring</documentation>
+          <documentation xml:lang="no">T01 = Ny garanti (evt. med feilmelding), T02 = Trukket garanti (evt. med feilmelding), T03 = Oppdatert garanti, S01 = Garanti som har blitt aktiv, S02 = Garanti som er opphørt, E01 = Endret kjennemerke, E02 = Endret avgiftsgruppe, G01 = Ønske fra nytt selskap om tilbakedatering av selskapsbytte, G02 = Ønske fra forrige selskap om gjenopptak av forsikring</documentation>
         </annotation>
       </element>
       <element name="meldingstid" type="dateTime">
@@ -1263,13 +1300,18 @@
           <documentation xml:lang="no">Overtakende selskap ved selskapsbytte</documentation>
         </annotation>
       </element>
+      <element name="brukerId" type="tns:string20" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Bruker-ID som forårsaket T01 / T02 / T03</documentation>
+        </annotation>
+      </element>
       <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
     </sequence>
   </complexType>
 
   <complexType name="MeldingsloggKjoeretoeyType">
     <sequence>
-      <group ref="tns:KjennemerkeGroup"/>
+      <group ref="tns:KjennemerkeLandkodeGroup"/>
       <element name="kjennemerkefarge" type="tns:int1" nillable="true">
         <annotation>
           <documentation xml:lang="no">TAD#32, VFTEK#6: 0 = Hvit, 1 = Svart, 2 = Rød, 3 = Blå, 4 = Grønn, 5 = Rally</documentation>
@@ -1378,6 +1420,7 @@
         </annotation>
       </element>
       <group ref="tns:NavnGroup"/>
+      <group ref="tns:AdresseGroup"/>
       <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
     </sequence>
   </complexType>
@@ -1413,7 +1456,7 @@
 
   <complexType name="ForsikretKjoeretoeyType">
     <sequence>
-      <group ref="tns:KjennemerkeGroup"/>
+      <group ref="tns:KjennemerkeLandkodeGroup"/>
       <element name="merkekode" type="tns:kode4" nillable="true">
         <annotation>
           <documentation xml:lang="no">TAD#8, VFTEK#11: Fabrikat, f.eks. 1230 for Audi - jfr. Kodehefte Autosys</documentation>
@@ -1446,7 +1489,7 @@
           <documentation xml:lang="no">F = Forsikret, U = Uforsikret, A = Avregistrert, S = Stjålet, V = Vraket</documentation>
         </annotation>
       </element>
-      <element name="kaskokode" type="tns:int1">
+      <element name="kaskokode" type="tns:int1" nillable="true">
         <annotation>
           <documentation xml:lang="no">0 = Ingen kasko, 1 = Delkasko, 2 = Full kasko</documentation>
         </annotation>
@@ -1598,6 +1641,16 @@
     </sequence>
   </group>
 
+  <group name="FnrOrgnrNillableGroup">
+    <sequence>
+      <element name="fnrOrgnr" type="tns:string11" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">TAD#9: Fødselsnr / orgnr</documentation>
+        </annotation>
+      </element>
+    </sequence>
+  </group>
+
   <group name="NavnGroup">
     <sequence>
       <element name="navn" type="tns:string100">
@@ -1620,17 +1673,17 @@
 
   <group name="AdresseGroup">
     <sequence>
-      <element name="adresse" type="tns:string40">
+      <element name="adresse" type="tns:string40" nillable="true">
         <annotation>
           <documentation xml:lang="no">TAD#11: Adresse</documentation>
         </annotation>
       </element>
-      <element name="postnr" type="tns:string4">
+      <element name="postnr" type="tns:string4" nillable="true">
         <annotation>
           <documentation xml:lang="no">TAD#12: Postnummer</documentation>
         </annotation>
       </element>
-      <element name="poststed" type="tns:string40">
+      <element name="poststed" type="tns:string40" nillable="true">
         <annotation>
           <documentation xml:lang="no">Poststed</documentation>
         </annotation>
@@ -1691,10 +1744,27 @@
     </sequence>
   </complexType>
 
+  <complexType name="FnrOrgnrNillableNavnNillableType">
+    <sequence>
+      <group ref="tns:FnrOrgnrNillableGroup"/>
+      <group ref="tns:NavnNillableGroup"/>
+      <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+    </sequence>
+  </complexType>
+
   <complexType name="FnrOrgnrNavnEpostTlfNillableType">
     <sequence>
       <group ref="tns:FnrOrgnrGroup"/>
       <group ref="tns:NavnGroup"/>
+      <group ref="tns:EpostTlfNillableGroup"/>
+      <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="FnrOrgnrNavnNillableEpostTlfNillableType">
+    <sequence>
+      <group ref="tns:FnrOrgnrGroup"/>
+      <group ref="tns:NavnNillableGroup"/>
       <group ref="tns:EpostTlfNillableGroup"/>
       <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
     </sequence>
