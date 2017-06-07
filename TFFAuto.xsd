@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<schema targetNamespace="https://tffauto.no/xml/TFFAuto/2017-05-11/TFFAuto.xsd"
-        xmlns:tns="https://tffauto.no/xml/TFFAuto/2017-05-11/TFFAuto.xsd"
+<schema targetNamespace="https://tffauto.no/xml/TFFAuto/2017-06-06/TFFAuto.xsd"
+        xmlns:tns="https://tffauto.no/xml/TFFAuto/2017-06-06/TFFAuto.xsd"
         xmlns="http://www.w3.org/2001/XMLSchema"
         elementFormDefault="unqualified">
   <annotation>
@@ -179,6 +179,18 @@
   <simpleType name="string100">
     <restriction base="string">
       <maxLength value="100"/>
+    </restriction>
+  </simpleType>
+
+  <simpleType name="string110">
+    <restriction base="string">
+      <maxLength value="110"/>
+    </restriction>
+  </simpleType>
+
+  <simpleType name="string180">
+    <restriction base="string">
+      <maxLength value="180"/>
     </restriction>
   </simpleType>
 
@@ -1220,11 +1232,6 @@
           <documentation xml:lang="no">Til og med dato</documentation>
         </annotation>
       </element>
-      <element name="sidenummer" type="int" nillable="true">
-        <annotation>
-          <documentation xml:lang="no">Sidenummer, nummerert fra 1</documentation>
-        </annotation>
-      </element>
       <element name="antallPerSide" type="int" nillable="true">
         <annotation>
           <documentation xml:lang="no">Maksimalt antall treff per side</documentation>
@@ -1610,7 +1617,7 @@
           <documentation xml:lang="no">Bruker-ID</documentation>
         </annotation>
       </element>
-      <element name="statuskode" type="tns:kode1">
+      <element name="brukerstatus" type="tns:kode1">
         <annotation>
           <documentation xml:lang="no">A = Aktiv, S = Slettet, P = Sperret pga. passordfeil, I = Sperret pga. inaktivitet</documentation>
         </annotation>
@@ -1653,7 +1660,7 @@
 
   <group name="NavnGroup">
     <sequence>
-      <element name="navn" type="tns:string100">
+      <element name="navn" type="tns:string180">
         <annotation>
           <documentation xml:lang="no">Navn</documentation>
         </annotation>
@@ -1663,7 +1670,7 @@
 
   <group name="NavnNillableGroup">
     <sequence>
-      <element name="navn" type="tns:string100" nillable="true">
+      <element name="navn" type="tns:string180" nillable="true">
         <annotation>
           <documentation xml:lang="no">Navn</documentation>
         </annotation>
@@ -1673,7 +1680,7 @@
 
   <group name="AdresseGroup">
     <sequence>
-      <element name="adresse" type="tns:string40" nillable="true">
+      <element name="adresse" type="tns:string110" nillable="true">
         <annotation>
           <documentation xml:lang="no">TAD#11: Adresse</documentation>
         </annotation>
@@ -1686,6 +1693,11 @@
       <element name="poststed" type="tns:string40" nillable="true">
         <annotation>
           <documentation xml:lang="no">Poststed</documentation>
+        </annotation>
+      </element>
+      <element name="land" type="tns:string40" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Land</documentation>
         </annotation>
       </element>
     </sequence>

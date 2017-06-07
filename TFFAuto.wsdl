@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions name="TFFAuto"
-             targetNamespace="https://tffauto.no/xml/TFFAuto/2017-05-11/TFFAuto.wsdl"
+             targetNamespace="https://tffauto.no/xml/TFFAuto/2017-06-06/TFFAuto.wsdl"
              xmlns="http://schemas.xmlsoap.org/wsdl/"
-             xmlns:tns="https://tffauto.no/xml/TFFAuto/2017-05-11/TFFAuto.wsdl"
-             xmlns:tffa="https://tffauto.no/xml/TFFAuto/2017-05-11/TFFAuto.xsd"
+             xmlns:tns="https://tffauto.no/xml/TFFAuto/2017-06-06/TFFAuto.wsdl"
+             xmlns:tffa="https://tffauto.no/xml/TFFAuto/2017-06-06/TFFAuto.xsd"
              xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
 
   <documentation>
@@ -16,8 +16,8 @@
   <types>
     <schema xmlns="http://www.w3.org/2001/XMLSchema">
       <import
-        namespace="https://tffauto.no/xml/TFFAuto/2017-05-11/TFFAuto.xsd"
-        schemaLocation="https://tffauto.no/xml/TFFAuto/2017-05-11/TFFAuto.xsd"/>
+        namespace="https://tffauto.no/xml/TFFAuto/2017-06-06/TFFAuto.xsd"
+        schemaLocation="https://tffauto.no/xml/TFFAuto/2017-06-06/TFFAuto.xsd"/>
     </schema>
   </types>
 
