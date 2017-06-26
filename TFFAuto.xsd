@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<schema targetNamespace="https://tffauto.no/xml/TFFAuto/2017-06-06/TFFAuto.xsd"
-        xmlns:tns="https://tffauto.no/xml/TFFAuto/2017-06-06/TFFAuto.xsd"
+<schema targetNamespace="https://tffauto.no/xml/TFFAuto/2017-06-21/TFFAuto.xsd"
+        xmlns:tns="https://tffauto.no/xml/TFFAuto/2017-06-21/TFFAuto.xsd"
         xmlns="http://www.w3.org/2001/XMLSchema"
         elementFormDefault="unqualified">
   <annotation>
@@ -83,6 +83,13 @@
   <simpleType name="kode2">
     <restriction base="string">
       <length value="2"/>
+    </restriction>
+  </simpleType>
+
+  <simpleType name="kode2_3">
+    <restriction base="string">
+      <minLength value="2"/>
+      <maxLength value="3"/>
     </restriction>
   </simpleType>
 
@@ -503,7 +510,7 @@
           <documentation xml:lang="no">TAD#15: Kjøringens art, jfr. Kodehefte Autosys</documentation>
         </annotation>
       </element>
-      <element name="avgiftsgruppe" type="tns:kode2" nillable="true">
+      <element name="avgiftsgruppe" type="tns:kode2_3" nillable="true">
         <annotation>
           <documentation xml:lang="no">Kode for avgiftsgruppe</documentation>
         </annotation>
@@ -942,9 +949,9 @@
           <documentation xml:lang="no">U = Uforsikret, K = Korrigert uforsikret, E = Ikke forsikret av eier, I = Ikke forsikringsplikt, S = Selvassuranse, V = Garanti på vent, A = Aktiv garanti</documentation>
         </annotation>
       </element>
-      <element name="forsikringsbehovskode" type="tns:kode1">
+      <element name="forsikringsbehovskode" type="tns:kode1" nillable="true">
         <annotation>
-          <documentation xml:lang="no">M = Prøvekjennemerke, N = Nyregistrering, E = Eierskifte, P = Påregistrering, S = Selskapsbytte, U = Forsikring av uforsikret kjøretøy, T = Tilbakedatert selskapsbytte</documentation>
+          <documentation xml:lang="no">M = Prøvekjennemerke, N = Nyregistrering, E = Eierskifte, P = Påregistrering, S = Selskapsbytte, U = Forsikring av uforsikret kjøretøy, T = Tilbakedatert selskapsbytte, G = Gjenopptatt, K = Kansellert men ikke gjenopptatt, F = Funnet</documentation>
         </annotation>
       </element>
       <element name="opphoerskode" type="tns:kode1" nillable="true">
@@ -975,6 +982,26 @@
       <element name="kaskokode" type="tns:int1" nillable="true">
         <annotation>
           <documentation xml:lang="no">0 = Ingen kasko, 1 = Delkasko, 2 = Full kasko</documentation>
+        </annotation>
+      </element>
+      <element name="egenandel" type="tns:int7" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Egenandel ved skade på eget kjøretøy, i norske kroner</documentation>
+        </annotation>
+      </element>
+      <element name="panthavergaranti" type="boolean" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Angir om det er tatt pant i kjøretøeyet</documentation>
+        </annotation>
+      </element>
+      <element name="endretStartdato" type="boolean">
+        <annotation>
+          <documentation xml:lang="no">Angir om ønsket startdato for ny garanti er endret</documentation>
+        </annotation>
+      </element>
+      <element name="overtakendeSelskap" type="tns:SelskapType" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Overtakende selskap ved selskapsbytte (Meldingslogg og Garantiliste)</documentation>
         </annotation>
       </element>
       <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
@@ -1010,9 +1037,19 @@
           <documentation xml:lang="no">Dato for hovedforfall</documentation>
         </annotation>
       </element>
-      <element name="kaskokode" type="tns:int1">
+      <element name="kaskokode" type="tns:int1" nillable="true">
         <annotation>
           <documentation xml:lang="no">0 = Ingen kasko, 1 = Delkasko, 2 = Full kasko</documentation>
+        </annotation>
+      </element>
+      <element name="egenandel" type="tns:int7" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Egenandel ved skade på eget kjøretøy, i norske kroner</documentation>
+        </annotation>
+      </element>
+      <element name="panthavergaranti" type="boolean" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Angir om det er tatt pant i kjøretøeyet</documentation>
         </annotation>
       </element>
       <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
@@ -1074,9 +1111,19 @@
           <documentation xml:lang="no">En oppsigelse på vent kan trekkes ved å sette feltet til blankt (xsi:nil="true")</documentation>
         </annotation>
       </element>
-      <element name="kaskokode" type="tns:int1">
+      <element name="kaskokode" type="tns:int1" nillable="true">
         <annotation>
           <documentation xml:lang="no">0 = Ingen kasko, 1 = Delkasko, 2 = Full kasko</documentation>
+        </annotation>
+      </element>
+      <element name="egenandel" type="tns:int7" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Egenandel ved skade på eget kjøretøy, i norske kroner</documentation>
+        </annotation>
+      </element>
+      <element name="panthavergaranti" type="boolean" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Angir om det er tatt pant i kjøretøeyet</documentation>
         </annotation>
       </element>
       <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
@@ -1199,7 +1246,7 @@
       <element name="meldingstyper" nillable="true">
         <complexType>
           <sequence>
-            <element name="meldingstype" type="tns:kode3" minOccurs="0" maxOccurs="10">
+            <element name="meldingstype" type="tns:kode3" minOccurs="0" maxOccurs="20">
               <annotation>
                 <documentation xml:lang="no">T01 = Ny garanti (evt. med feilmelding), T02 = Trukket garanti (evt. med feilmelding), T03 = Endret garanti (evt. med feilmelding), S01 = Garanti som har blitt aktiv, S02 = Garanti som er opphørt, E01 = Endret kjennemerke, E02 = Endret avgiftsgruppe, E03 = Endret fødselsnummer, navn eller adresse</documentation>
               </annotation>
@@ -1297,16 +1344,6 @@
           <documentation xml:lang="no">Garantidata</documentation>
         </annotation>
       </element>
-      <element name="endretStartdato" type="boolean" nillable="true">
-        <annotation>
-          <documentation xml:lang="no">Angir om ønsket startdato for ny garanti er endret</documentation>
-        </annotation>
-      </element>
-      <element name="overtakendeSelskap" type="tns:SelskapType" nillable="true">
-        <annotation>
-          <documentation xml:lang="no">Overtakende selskap ved selskapsbytte</documentation>
-        </annotation>
-      </element>
       <element name="brukerId" type="tns:string20" nillable="true">
         <annotation>
           <documentation xml:lang="no">Bruker-ID som forårsaket T01 / T02 / T03</documentation>
@@ -1389,7 +1426,7 @@
           <documentation xml:lang="no">TAD#15: Kode for kjøringens art, jfr. Kodehefte Autosys</documentation>
         </annotation>
       </element>
-      <element name="avgiftsgruppe" type="tns:kode2" nillable="true">
+      <element name="avgiftsgruppe" type="tns:kode2_3" nillable="true">
         <annotation>
           <documentation xml:lang="no">Kode for avgiftsgruppe</documentation>
         </annotation>
@@ -1399,7 +1436,7 @@
           <documentation xml:lang="no">Dato som avgiftsgruppen gjelder fra, mhp. tilbakedatert endring av avgiftsgruppe pga. omregistrering</documentation>
         </annotation>
       </element>
-      <element name="forrigeAvgiftsgruppe" type="tns:kode2" nillable="true">
+      <element name="forrigeAvgiftsgruppe" type="tns:kode2_3" nillable="true">
         <annotation>
           <documentation xml:lang="no">Kode for forrige avgiftsgruppe</documentation>
         </annotation>
@@ -1545,7 +1582,7 @@
 
   <complexType name="AvgiftsgruppeDataType">
     <sequence>
-      <element name="avgiftsgruppe" type="tns:kode2">
+      <element name="avgiftsgruppe" type="tns:kode2_3">
         <annotation>
           <documentation xml:lang="no">Kode for avgiftsgruppe</documentation>
         </annotation>
