@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<schema targetNamespace="https://tffauto.no/xml/TFFAuto/2017-06-21/TFFAuto.xsd"
-        xmlns:tns="https://tffauto.no/xml/TFFAuto/2017-06-21/TFFAuto.xsd"
+<schema targetNamespace="https://tffauto.no/xml/TFFAuto/2017-09-27/TFFAuto.xsd"
+        xmlns:tns="https://tffauto.no/xml/TFFAuto/2017-09-27/TFFAuto.xsd"
         xmlns="http://www.w3.org/2001/XMLSchema"
         elementFormDefault="unqualified">
   <annotation>
@@ -113,7 +113,7 @@
 
   <simpleType name="string2">
     <restriction base="string">
-      <length value="2"/>
+      <maxLength value="2"/>
     </restriction>
   </simpleType>
 
@@ -260,7 +260,12 @@
       </element>
       <element name="selskapsnavn" type="tns:string30">
         <annotation>
-          <documentation xml:lang="no">F.eks. IF</documentation>
+          <documentation xml:lang="no">Navn på forsikringsselskap</documentation>
+        </annotation>
+      </element>
+      <element name="agentId" type="tns:string20" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Agent-ID</documentation>
         </annotation>
       </element>
       <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
@@ -379,12 +384,17 @@
     <sequence>
       <element name="garantistatus" type="tns:kode1">
         <annotation>
-          <documentation xml:lang="no">U = Uforsikret, K = Korrigert uforsikret, E = Ikke forsikret av eier, I = Ikke forsikringsplikt, S = Selvassuranse, V = Garanti på vent, A = Aktiv garanti</documentation>
+          <documentation xml:lang="no">A = Aktiv garanti, E = Ikke forsikret av eier, G = Til godkjenning, I = Ikke forsikringsplikt, S = Selvassuranse, U = Uforsikret, V = Garanti på vent</documentation>
         </annotation>
       </element>
       <element name="eier" type="tns:FnrOrgnrNavnType">
         <annotation>
           <documentation xml:lang="no">Eiers fødselsnr / orgnr og navn</documentation>
+        </annotation>
+      </element>
+      <element name="offisiellEier" type="boolean">
+        <annotation>
+          <documentation xml:lang="no">Angir om garantien gjelder for offisiell eier</documentation>
         </annotation>
       </element>
       <element name="forsikringstaker" type="tns:FnrOrgnrNavnType" nillable="true">
@@ -572,6 +582,11 @@
 
   <complexType name="TekniskType">
     <sequence>
+      <element name="kompletteData" type="boolean" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Angir om komplette tekniske data er lastet inn fra Autosys. Feltet er blankt (xsi:nil="true") for NYREG / PKJM</documentation>
+        </annotation>
+      </element>
       <element name="typegodkjenningsnr" type="tns:string11" nillable="true">
         <annotation>
           <documentation xml:lang="no">VFTEK#7: Typegodkjenningsnummer</documentation>
@@ -934,6 +949,11 @@
           <documentation xml:lang="no">Eier</documentation>
         </annotation>
       </element>
+      <element name="offisiellEier" type="boolean">
+        <annotation>
+          <documentation xml:lang="no">Angir om garantien gjelder for offisiell eier</documentation>
+        </annotation>
+      </element>
       <element name="forsikringstaker" type="tns:FnrOrgnrNavnEpostTlfNillableType" nillable="true">
         <annotation>
           <documentation xml:lang="no">Forsikringstaker</documentation>
@@ -946,17 +966,17 @@
       </element>
       <element name="garantistatus" type="tns:kode1">
         <annotation>
-          <documentation xml:lang="no">U = Uforsikret, K = Korrigert uforsikret, E = Ikke forsikret av eier, I = Ikke forsikringsplikt, S = Selvassuranse, V = Garanti på vent, A = Aktiv garanti</documentation>
+          <documentation xml:lang="no">A = Aktiv garanti, E = Ikke forsikret av eier, G = Til godkjenning, I = Ikke forsikringsplikt, S = Selvassuranse, U = Uforsikret, V = Garanti på vent</documentation>
         </annotation>
       </element>
       <element name="forsikringsbehovskode" type="tns:kode1" nillable="true">
         <annotation>
-          <documentation xml:lang="no">M = Prøvekjennemerke, N = Nyregistrering, E = Eierskifte, P = Påregistrering, S = Selskapsbytte, U = Forsikring av uforsikret kjøretøy, T = Tilbakedatert selskapsbytte, G = Gjenopptatt, K = Kansellert men ikke gjenopptatt, F = Funnet</documentation>
+          <documentation xml:lang="no">A = Gjenopptak avslått, D = Garanti ifbm. dagsgebyr, E = Eierskifte, F = Gjenfunnet, G = Gjenopptatt, K = Kansellert men ikke gjenopptatt, M = Prøvekjennemerke, N = Nyregistrering, P = Påregistrering, S = Selskapsbytte, T = Tilbakedatert selskapsbytte, U = Forsikring av uforsikret kjøretøy, Z = Ønske om selskapsbytte ved angring</documentation>
         </annotation>
       </element>
       <element name="opphoerskode" type="tns:kode1" nillable="true">
         <annotation>
-          <documentation xml:lang="no">E = Eierskifte, S = Selskapsbytte, A = Avregistrert, K = Avregistrert, kanskje solgt, V = Vraket, T = Tyveri, U = Utført, F = Foreldet garanti, X = Trukket garanti</documentation>
+          <documentation xml:lang="no">A = Avregistrert, E = Eierskifte, F = Foreldet garanti, K = Avregistrert - kanskje solgt, N = Ny opphørsdato, S = Selskapsbytte, T = Tyveri, U = Utført, V = Vraket, X = Trukket garanti</documentation>
         </annotation>
       </element>
       <element name="startdato" type="date">
@@ -964,9 +984,14 @@
           <documentation xml:lang="no">Datoen som garantien gjelder fra</documentation>
         </annotation>
       </element>
+      <element name="oppsigelsesdato" type="date" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Evt. fremtidig opphørsdato for trukket garanti</documentation>
+        </annotation>
+      </element>
       <element name="opphoersdato" type="date" nillable="true">
         <annotation>
-          <documentation xml:lang="no">Datoen som garantien gjelder til</documentation>
+          <documentation xml:lang="no">Opphørsdato for garantien (gjelder ut dagen)</documentation>
         </annotation>
       </element>
       <element name="aarsakskode" type="tns:int2" nillable="true">
@@ -981,7 +1006,7 @@
       </element>
       <element name="kaskokode" type="tns:int1" nillable="true">
         <annotation>
-          <documentation xml:lang="no">0 = Ingen kasko, 1 = Delkasko, 2 = Full kasko</documentation>
+          <documentation xml:lang="no">Blank (xsi:nil="true") = Ikke oppgitt, 0 = Ingen kasko, 1 = Delkasko, 2 = Full kasko</documentation>
         </annotation>
       </element>
       <element name="egenandel" type="tns:int7" nillable="true">
@@ -991,7 +1016,7 @@
       </element>
       <element name="panthavergaranti" type="boolean" nillable="true">
         <annotation>
-          <documentation xml:lang="no">Angir om det er tatt pant i kjøretøeyet</documentation>
+          <documentation xml:lang="no">Blank (xsi:nil="true") = Ikke oppgitt, false = Det er ikke tatt pant i kjøretøyet, true = Det er tatt pant i kjøretøyet</documentation>
         </annotation>
       </element>
       <element name="endretStartdato" type="boolean">
@@ -999,10 +1024,24 @@
           <documentation xml:lang="no">Angir om ønsket startdato for ny garanti er endret</documentation>
         </annotation>
       </element>
-      <element name="overtakendeSelskap" type="tns:SelskapType" nillable="true">
+      <element name="selskapsbytte" nillable="true">
         <annotation>
-          <documentation xml:lang="no">Overtakende selskap ved selskapsbytte (Meldingslogg og Garantiliste)</documentation>
+          <documentation xml:lang="no">Evt. selskapsbytte</documentation>
         </annotation>
+        <complexType>
+          <sequence>
+            <element name="overtakendeSelskap" type="tns:SelskapType">
+              <annotation>
+                <documentation xml:lang="no">Overtakende selskap ved selskapsbytte</documentation>
+              </annotation>
+            </element>
+            <element name="overtakelsesdato" type="date" nillable="true">
+              <annotation>
+                <documentation xml:lang="no">Dato for selskapsbytte</documentation>
+              </annotation>
+            </element>
+          </sequence>
+        </complexType>
       </element>
       <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
     </sequence>
@@ -1024,7 +1063,7 @@
       </element>
       <element name="forsikringsbehovskode" type="tns:kode1" nillable="true">
         <annotation>
-          <documentation xml:lang="no">M = Prøvekjennemerke, N = Nyregistrering, E = Eierskifte, P = Påregistrering, S = Selskapsbytte, U = Forsikring av uforsikret kjøretøy, T = Tilbakedatert selskapsbytte</documentation>
+          <documentation xml:lang="no">E = Eierskifte, M = Prøvekjennemerke, N = Nyregistrering, P = Påregistrering, S = Selskapsbytte, T = Tilbakedatert selskapsbytte, U = Forsikring av uforsikret kjøretøy, Z = Ønske om selskapsbytte ved angring</documentation>
         </annotation>
       </element>
       <element name="startdato" type="date" nillable="true">
@@ -1039,7 +1078,7 @@
       </element>
       <element name="kaskokode" type="tns:int1" nillable="true">
         <annotation>
-          <documentation xml:lang="no">0 = Ingen kasko, 1 = Delkasko, 2 = Full kasko</documentation>
+          <documentation xml:lang="no">Blank (xsi:nil="true") = Ikke oppgitt, 0 = Ingen kasko, 1 = Delkasko, 2 = Full kasko</documentation>
         </annotation>
       </element>
       <element name="egenandel" type="tns:int7" nillable="true">
@@ -1049,7 +1088,7 @@
       </element>
       <element name="panthavergaranti" type="boolean" nillable="true">
         <annotation>
-          <documentation xml:lang="no">Angir om det er tatt pant i kjøretøeyet</documentation>
+          <documentation xml:lang="no">Blank (xsi:nil="true") = Ikke oppgitt, false = Det er ikke tatt pant i kjøretøyet, true = Det er tatt pant i kjøretøyet</documentation>
         </annotation>
       </element>
       <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
@@ -1101,19 +1140,24 @@
           <documentation xml:lang="no">Forsikringstaker</documentation>
         </annotation>
       </element>
+      <element name="agentId" type="tns:string20" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Agent-ID</documentation>
+        </annotation>
+      </element>
       <element name="hovedforfall" type="date" nillable="true">
         <annotation>
           <documentation xml:lang="no">Dato for hovedforfall</documentation>
         </annotation>
       </element>
-      <element name="opphoersdato" type="date" nillable="true">
+      <element name="oppsigelsesdato" type="date" nillable="true">
         <annotation>
           <documentation xml:lang="no">En oppsigelse på vent kan trekkes ved å sette feltet til blankt (xsi:nil="true")</documentation>
         </annotation>
       </element>
       <element name="kaskokode" type="tns:int1" nillable="true">
         <annotation>
-          <documentation xml:lang="no">0 = Ingen kasko, 1 = Delkasko, 2 = Full kasko</documentation>
+          <documentation xml:lang="no">Blank (xsi:nil="true") = Ikke oppgitt, 0 = Ingen kasko, 1 = Delkasko, 2 = Full kasko</documentation>
         </annotation>
       </element>
       <element name="egenandel" type="tns:int7" nillable="true">
@@ -1123,7 +1167,7 @@
       </element>
       <element name="panthavergaranti" type="boolean" nillable="true">
         <annotation>
-          <documentation xml:lang="no">Angir om det er tatt pant i kjøretøeyet</documentation>
+          <documentation xml:lang="no">Blank (xsi:nil="true") = Ikke oppgitt, false = Det er ikke tatt pant i kjøretøyet, true = Det er tatt pant i kjøretøyet</documentation>
         </annotation>
       </element>
       <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
@@ -1140,7 +1184,7 @@
       </element>
       <element name="opphoersdato" type="date" nillable="true">
         <annotation>
-          <documentation xml:lang="no">Datoen som garantien gjelder til</documentation>
+          <documentation xml:lang="no">Opphørsdato for garantien (gjelder ut dagen)</documentation>
         </annotation>
       </element>
       <element name="aarsakskode" type="tns:int2">
@@ -1177,12 +1221,12 @@
       </element>
       <element name="forsikringsbehovskode" type="tns:kode1" nillable="true">
         <annotation>
-          <documentation xml:lang="no">M = Prøvekjennemerke, N = Nyregistrering, E = Eierskifte, P = Påregistrering, S = Selskapsbytte, U = Forsikring av uforsikret kjøretøy, T = Tilbakedatert selskapsbytte</documentation>
+          <documentation xml:lang="no">E = Eierskifte, M = Prøvekjennemerke, N = Nyregistrering, P = Påregistrering, S = Selskapsbytte, T = Tilbakedatert selskapsbytte, U = Forsikring av uforsikret kjøretøy</documentation>
         </annotation>
       </element>
       <element name="opphoerskode" type="tns:kode1" nillable="true">
         <annotation>
-          <documentation xml:lang="no">E = Eierskifte, S = Selskapsbytte, A = Avregistrert, K = Avregistrert, kanskje solgt, V = Vraket, T = Tyveri, U = Utført, F = Foreldet garanti, X = Trukket garanti</documentation>
+          <documentation xml:lang="no">A = Avregistrert, E = Eierskifte, F = Foreldet garanti, K = Avregistrert - kanskje solgt, S = Selskapsbytte, T = Tyveri, U = Utført, V = Vraket, X = Trukket garanti</documentation>
         </annotation>
       </element>
       <element name="selskapskode" type="tns:kode4" nillable="true">
@@ -1248,7 +1292,7 @@
           <sequence>
             <element name="meldingstype" type="tns:kode3" minOccurs="0" maxOccurs="20">
               <annotation>
-                <documentation xml:lang="no">T01 = Ny garanti (evt. med feilmelding), T02 = Trukket garanti (evt. med feilmelding), T03 = Endret garanti (evt. med feilmelding), S01 = Garanti som har blitt aktiv, S02 = Garanti som er opphørt, E01 = Endret kjennemerke, E02 = Endret avgiftsgruppe, E03 = Endret fødselsnummer, navn eller adresse</documentation>
+                <documentation xml:lang="no">E01 = Endret kjennemerke, E02 = Endret avgiftsgruppe, E03 = Endret fødselsnummer, navn eller adresse, S01 = Garanti som har blitt aktiv, S02 = Garanti som er opphørt, T01 = Ny garanti (evt. med feilmelding), T02 = Trukket garanti (evt. med feilmelding), T03 = Endret garanti (evt. med feilmelding)</documentation>
               </annotation>
             </element>
           </sequence>
@@ -1319,7 +1363,7 @@
       </element>
       <element name="meldingstype" type="tns:kode3">
         <annotation>
-          <documentation xml:lang="no">T01 = Ny garanti (evt. med feilmelding), T02 = Trukket garanti (evt. med feilmelding), T03 = Oppdatert garanti, S01 = Garanti som har blitt aktiv, S02 = Garanti som er opphørt, E01 = Endret kjennemerke, E02 = Endret avgiftsgruppe, G01 = Ønske fra nytt selskap om tilbakedatering av selskapsbytte, G02 = Ønske fra forrige selskap om gjenopptak av forsikring</documentation>
+          <documentation xml:lang="no">E01 = Endret kjennemerke, E02 = Endret avgiftsgruppe, G01 = Ønske fra nytt selskap om tilbakedatering av selskapsbytte, G02 = Ønske fra forrige selskap om gjenopptak av forsikring, S01 = Garanti som har blitt aktiv, S02 = Garanti som er opphørt, T01 = Ny garanti (evt. med feilmelding), T02 = Trukket garanti (evt. med feilmelding), T03 = Oppdatert garanti, V01 = Salgsmelding matcher ikke egen garanti, V02 = Kjøretøy er gjenfunnet, V03 = Annet selskap har lagt inn garanti på vent, V04 = Garanti på vent (ref. V03) er trukket</documentation>
         </annotation>
       </element>
       <element name="meldingstid" type="dateTime">
@@ -1346,7 +1390,7 @@
       </element>
       <element name="brukerId" type="tns:string20" nillable="true">
         <annotation>
-          <documentation xml:lang="no">Bruker-ID som forårsaket T01 / T02 / T03</documentation>
+          <documentation xml:lang="no">Bruker-ID som forårsaket T01 / T02 / T03 / T04</documentation>
         </annotation>
       </element>
       <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
@@ -1535,7 +1579,7 @@
       </element>
       <element name="kaskokode" type="tns:int1" nillable="true">
         <annotation>
-          <documentation xml:lang="no">0 = Ingen kasko, 1 = Delkasko, 2 = Full kasko</documentation>
+          <documentation xml:lang="no">Blank (xsi:nil="true") = Ikke oppgitt, 0 = Ingen kasko, 1 = Delkasko, 2 = Full kasko</documentation>
         </annotation>
       </element>
       <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
@@ -1608,8 +1652,13 @@
           <documentation xml:lang="no">Rolle-ID</documentation>
         </annotation>
       </element>
+      <element name="agentId" type="tns:string20" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Agent-ID</documentation>
+        </annotation>
+      </element>
       <group ref="tns:NavnGroup"/>
-      <group ref="tns:EpostTlfGroup"/>
+      <group ref="tns:EpostTlfNillableGroup"/>
       <element name="ipfilter" type="tns:string100" nillable="true">
         <annotation>
           <documentation xml:lang="no">Tillatte IP-adresser eller -subnett i CIDR-notasjon, skilt med mellomrom</documentation>
@@ -1664,8 +1713,13 @@
           <documentation xml:lang="no">Rolle-ID</documentation>
         </annotation>
       </element>
+      <element name="agentId" type="tns:string20" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Agent-ID</documentation>
+        </annotation>
+      </element>
       <group ref="tns:NavnGroup"/>
-      <group ref="tns:EpostTlfGroup"/>
+      <group ref="tns:EpostTlfNillableGroup"/>
       <element name="ipfilter" type="tns:string100" nillable="true">
         <annotation>
           <documentation xml:lang="no">Tillatte IP-adresser eller -subnett i CIDR-notasjon, skilt med mellomrom</documentation>
