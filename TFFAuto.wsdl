@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions name="TFFAuto"
-             targetNamespace="https://tffauto.no/xml/TFFAuto/2017-09-27/TFFAuto.wsdl"
+             targetNamespace="https://tffauto.no/xml/TFFAuto/2017-11-06/TFFAuto.wsdl"
              xmlns="http://schemas.xmlsoap.org/wsdl/"
-             xmlns:tns="https://tffauto.no/xml/TFFAuto/2017-09-27/TFFAuto.wsdl"
-             xmlns:tffa="https://tffauto.no/xml/TFFAuto/2017-09-27/TFFAuto.xsd"
+             xmlns:tns="https://tffauto.no/xml/TFFAuto/2017-11-06/TFFAuto.wsdl"
+             xmlns:tffa="https://tffauto.no/xml/TFFAuto/2017-11-06/TFFAuto.xsd"
              xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
 
   <documentation>
@@ -16,8 +16,8 @@
   <types>
     <schema xmlns="http://www.w3.org/2001/XMLSchema">
       <import
-        namespace="https://tffauto.no/xml/TFFAuto/2017-09-27/TFFAuto.xsd"
-        schemaLocation="https://tffauto.no/xml/TFFAuto/2017-09-27/TFFAuto.xsd"/>
+        namespace="https://tffauto.no/xml/TFFAuto/2017-11-06/TFFAuto.xsd"
+        schemaLocation="https://tffauto.no/xml/TFFAuto/2017-11-06/TFFAuto.xsd"/>
     </schema>
   </types>
 
@@ -60,10 +60,10 @@
     <part name="Garanti" element="tffa:Garanti"/>
   </message>
   <message name="hentGarantilisteRequest">
-    <part name="parameters" element="tffa:hentGarantiliste"/>
+    <part name="hentGarantiliste" element="tffa:hentGarantiliste"/>
   </message>
   <message name="hentGarantilisteResponse">
-    <part name="hentGarantiliste" element="tffa:Garantiliste"/>
+    <part name="Garantiliste" element="tffa:Garantiliste"/>
   </message>
   <message name="hentMeldingsloggRequest">
     <part name="hentMeldingslogg" element="tffa:hentMeldingslogg"/>
@@ -82,6 +82,18 @@
   </message>
   <message name="beregnAvgiftsgruppeResponse">
     <part name="Avgiftsgruppe" element="tffa:Avgiftsgruppe"/>
+  </message>
+  <message name="hentBrukerlisteRequest">
+    <part name="hentBrukerliste" element="tffa:hentBrukerliste"/>
+  </message>
+  <message name="hentBrukerlisteResponse">
+    <part name="Brukerliste" element="tffa:Brukerliste"/>
+  </message>
+  <message name="hentBrukerRequest">
+    <part name="hentBruker" element="tffa:hentBruker"/>
+  </message>
+  <message name="hentBrukerResponse">
+    <part name="Bruker" element="tffa:Bruker"/>
   </message>
   <message name="opprettBrukerRequest">
     <part name="opprettBruker" element="tffa:opprettBruker"/>
@@ -173,6 +185,22 @@
       </documentation>
       <input message="tns:beregnAvgiftsgruppeRequest"/>
       <output message="tns:beregnAvgiftsgruppeResponse"/>
+      <fault name="feil" message="tns:feil"/>
+    </operation>
+    <operation name="hentBrukerliste">
+      <documentation>
+        Hent bruker.
+      </documentation>
+      <input message="tns:hentBrukerlisteRequest"/>
+      <output message="tns:hentBrukerlisteResponse"/>
+      <fault name="feil" message="tns:feil"/>
+    </operation>
+    <operation name="hentBruker">
+      <documentation>
+        Hent bruker.
+      </documentation>
+      <input message="tns:hentBrukerRequest"/>
+      <output message="tns:hentBrukerResponse"/>
       <fault name="feil" message="tns:feil"/>
     </operation>
     <operation name="opprettBruker">
@@ -308,6 +336,32 @@
       </fault>
     </operation>
     <operation name="beregnAvgiftsgruppe">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:header message="tns:spoerring" part="Autentisering" use="literal"/>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="feil">
+        <soap:fault name="feil" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="hentBrukerliste">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:header message="tns:spoerring" part="Autentisering" use="literal"/>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="feil">
+        <soap:fault name="feil" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="hentBruker">
       <soap:operation soapAction=""/>
       <input>
         <soap:header message="tns:spoerring" part="Autentisering" use="literal"/>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<schema targetNamespace="https://tffauto.no/xml/TFFAuto/2017-09-27/TFFAuto.xsd"
-        xmlns:tns="https://tffauto.no/xml/TFFAuto/2017-09-27/TFFAuto.xsd"
+<schema targetNamespace="https://tffauto.no/xml/TFFAuto/2017-11-06/TFFAuto.xsd"
+        xmlns:tns="https://tffauto.no/xml/TFFAuto/2017-11-06/TFFAuto.xsd"
         xmlns="http://www.w3.org/2001/XMLSchema"
         elementFormDefault="unqualified">
   <annotation>
@@ -334,7 +334,7 @@
           <documentation xml:lang="no">Tekniske data</documentation>
         </annotation>
       </element>
-      <element name="eier" type="tns:FnrOrgnrNavnType">
+      <element name="eier" type="tns:FnrOrgnrNillableNavnType">
         <annotation>
           <documentation xml:lang="no">Eier ihht. siste om- eller påregistrering eller salgsmelding</documentation>
         </annotation>
@@ -387,7 +387,7 @@
           <documentation xml:lang="no">A = Aktiv garanti, E = Ikke forsikret av eier, G = Til godkjenning, I = Ikke forsikringsplikt, S = Selvassuranse, U = Uforsikret, V = Garanti på vent</documentation>
         </annotation>
       </element>
-      <element name="eier" type="tns:FnrOrgnrNavnType">
+      <element name="eier" type="tns:FnrOrgnrNillableNavnType">
         <annotation>
           <documentation xml:lang="no">Eiers fødselsnr / orgnr og navn</documentation>
         </annotation>
@@ -944,7 +944,7 @@
         </annotation>
       </element>
       <element name="kjoeretoey" type="tns:KjennemerkeLandkodeType"/>
-      <element name="eier" type="tns:FnrOrgnrNavnType">
+      <element name="eier" type="tns:FnrOrgnrNillableNavnType">
         <annotation>
           <documentation xml:lang="no">Eier</documentation>
         </annotation>
@@ -1490,7 +1490,7 @@
           <documentation xml:lang="no">Dagsats for TA, i norske kroner</documentation>
         </annotation>
       </element>
-      <element name="eier" type="tns:FnrOrgnrNavnType">
+      <element name="eier" type="tns:FnrOrgnrNillableNavnType">
         <annotation>
           <documentation xml:lang="no">Data om eier</documentation>
         </annotation>
@@ -1634,6 +1634,70 @@
       <element name="dagsats" type="tns:decimal6_2">
         <annotation>
           <documentation xml:lang="no">Dagsats for TA, i norske kroner</documentation>
+        </annotation>
+      </element>
+      <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="HentBrukerlisteType">
+    <sequence>
+      <element name="soekeord" type="tns:string100">
+        <annotation>
+          <documentation xml:lang="no">Søk på bruker-ID, navn, rolle, epost, og tlfnr</documentation>
+        </annotation>
+      </element>
+      <element name="trunkertSoek" type="boolean">
+        <annotation>
+          <documentation xml:lang="no">Angir om det skal gis treff på start av ord</documentation>
+        </annotation>
+      </element>
+      <element name="sidenummer" type="int" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Sidenummer, nummerert fra 1</documentation>
+        </annotation>
+      </element>
+      <element name="antallPerSide" type="int" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Maksimalt antall treff per side</documentation>
+        </annotation>
+      </element>
+      <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="BrukerlisteType">
+    <sequence>
+      <element name="statuskode" type="tns:int4">
+        <annotation>
+          <documentation xml:lang="no">Statuskode</documentation>
+        </annotation>
+      </element>
+      <element name="statustekst" type="tns:string100" nillable="true">
+        <annotation>
+          <documentation xml:lang="no">Statustekst</documentation>
+        </annotation>
+      </element>
+      <element name="data" type="tns:BrukerlisteBrukereType" nillable="true"/>
+      <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="BrukerlisteBrukereType">
+    <sequence>
+      <element name="bruker" type="tns:BrukerDataType" minOccurs="0" maxOccurs="unbounded">
+        <annotation>
+          <documentation xml:lang="no">Brukerdata</documentation>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+
+  <complexType name="HentBrukerType">
+    <sequence>
+      <element name="brukerId" type="tns:string20">
+        <annotation>
+          <documentation xml:lang="no">Bruker-ID</documentation>
         </annotation>
       </element>
       <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
@@ -1839,6 +1903,14 @@
     </sequence>
   </complexType>
 
+  <complexType name="FnrOrgnrNillableNavnType">
+    <sequence>
+      <group ref="tns:FnrOrgnrNillableGroup"/>
+      <group ref="tns:NavnGroup"/>
+      <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+    </sequence>
+  </complexType>
+
   <complexType name="FnrOrgnrNavnNillableType">
     <sequence>
       <group ref="tns:FnrOrgnrGroup"/>
@@ -1880,7 +1952,7 @@
           <documentation xml:lang="no">TAD#16 (recordtype 51/52): Dato for eierskifte / dato for om- eller påregistrering ny eier</documentation>
         </annotation>
       </element>
-      <group ref="tns:FnrOrgnrGroup"/>
+      <group ref="tns:FnrOrgnrNillableGroup"/>
       <group ref="tns:NavnGroup"/>
       <group ref="tns:AdresseGroup"/>
       <any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
@@ -2059,6 +2131,39 @@
       </documentation>
       <documentation xml:lang="en">
         Determined tax group.
+      </documentation>
+    </annotation>
+  </element>
+
+  <element name="hentBrukerliste" type="tns:HentBrukerlisteType">
+    <annotation>
+      <documentation xml:lang="no">
+        Hent liste over brukere.
+      </documentation>
+      <documentation xml:lang="en">
+        Fetch list of users.
+      </documentation>
+    </annotation>
+  </element>
+
+  <element name="Brukerliste" type="tns:BrukerlisteType">
+    <annotation>
+      <documentation xml:lang="no">
+        Data for brukere.
+      </documentation>
+      <documentation xml:lang="en">
+        Data for users.
+      </documentation>
+    </annotation>
+  </element>
+
+  <element name="hentBruker" type="tns:HentBrukerType">
+    <annotation>
+      <documentation xml:lang="no">
+        Hent informasjon om bruker.
+      </documentation>
+      <documentation xml:lang="en">
+        Fetch information on user.
       </documentation>
     </annotation>
   </element>
